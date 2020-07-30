@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import loginValidation from '../services/loginValidation';
+import { setLocalStorage } from '../services/localStorage';
 
 const Login = () => {
   const [email, setEmail] = useState(null);
@@ -23,7 +24,11 @@ const Login = () => {
       <Button
         test="login-submit-button"
         disabled={loginValidation(email, password)}
-        onClick={() => }
+        onClick={(email) => {
+          setLocalStorage('mealsToken', 1);
+          setLocalStorage('cocktailsToken', 1);
+          // setLocalStorage('user', [{email: email, }]);
+        }}
       >
         Entrar
       </Button>
