@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-// import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 
 // import {
@@ -22,11 +22,12 @@ import Login from './pages/Login';
 //   FavoriteRecipes,
 // } from './pages';
 
-
 function App() {
   return (
     <div id="meals">
-      <Login />
+      <Switch>
+        <Route exact path="/" component={Login} />
+      </Switch>
     </div>
   );
 }
