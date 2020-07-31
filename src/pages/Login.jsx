@@ -24,10 +24,10 @@ const Login = () => {
       <Button
         test="login-submit-button"
         disabled={loginValidation(email, password)}
-        onClick={(email) => {
+        onClick={() => {
           setLocalStorage('mealsToken', 1);
           setLocalStorage('cocktailsToken', 1);
-          // setLocalStorage('user', [{email: email, }]);
+          setLocalStorage('user', {email: email });
         }}
       >
         Entrar
