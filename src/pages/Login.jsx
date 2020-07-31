@@ -27,7 +27,7 @@ const Login = () => {
         onClick={() => {
           setLocalStorage('mealsToken', 1);
           setLocalStorage('cocktailsToken', 1);
-          setLocalStorage('user', {email: email });
+          setLocalStorage('user', { email: email });
         }}
       >
         Entrar
