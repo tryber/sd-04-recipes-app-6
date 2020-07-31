@@ -1,11 +1,15 @@
 const loginValidation = (email, password) => {
   let emailValidation = true;
+  let passwordValidation = true;
+
   if (email) {
     emailValidation = email.match(
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
     );
   }
-  let passwordValidation = password?.length > 6;
+  if (password) {
+    passwordValidation = password.length > 6;
+  }
   if (emailValidation && passwordValidation) return false;
   return true;
 };
