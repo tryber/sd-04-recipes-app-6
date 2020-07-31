@@ -1,6 +1,6 @@
 const loginValidation = (email, password) => {
-  let emailValidation = true;
-  let passwordValidation = true;
+  let emailValidation = false;
+  let passwordValidation = false;
 
   if (email) {
     emailValidation = email.match(

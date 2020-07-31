@@ -11,6 +11,7 @@ const Login = () => {
 
   return (
     <div>
+      <h1>Login</h1>
       <Input
         test="email-input"
         placeholder="Digite seu e-mail"
