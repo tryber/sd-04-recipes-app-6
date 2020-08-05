@@ -3,11 +3,14 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import loginValidation from '../services/loginValidation';
 import { setLocalStorage } from '../services/localStorage';
+import getRecipesFoodsAPI from '../services/getRecipesApi';
 
 const Login = () => {
   const [email, setEmail] = useState(null);
 
   const [password, setPassword] = useState(null);
+
+  getRecipesFoodsAPI().then((data) => console.log(data));
 
   return (
     <div>
