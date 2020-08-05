@@ -15,6 +15,7 @@ const Input = ({ type = 'text', placeholder, onChange, test, id, name }) => (
 export default Input;
 
 Input.propTypes = {
+  name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,

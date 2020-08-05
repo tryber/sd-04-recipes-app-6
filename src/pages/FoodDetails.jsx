@@ -1,20 +1,20 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+// import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getFoodDetails } from '../redux/actions/foodDetails';
-import { useParams } from 'react-router-dom';
 
 const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
   // const { id } = useParams();
   const id = 52882;
   useEffect(() => {
     getFoodDetailsProps(
-      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
     );
   }, []);
   const getNumberOfIngredients = () => {
     const ingredientsNumber = Object.keys(foodInfo).filter((key) =>
-      key.includes('strIngredient')
+      key.includes('strIngredient'),
     );
 
     return ingredientsNumber;
@@ -31,10 +31,13 @@ const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
           if (foodInfo[ingredientKey] !== '') {
             return (
               <p data-testid={`${index}-ingredient-name-and-measure`}>
-                {foodInfo[ingredientKey]} - {foodInfo[`strMeasure${index + 1}`]}
+                {foodInfo[ingredientKey]}
+                -
+                {foodInfo[`strMeasure${index + 1}`]}
               </p>
             );
           }
+          return null;
         })}
         <p data-testid="instructions">{foodInfo.strInstructions}</p>
       </div>
@@ -52,3 +55,8 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(FoodDetails);
+
+FoodDetails.propTypes = {
+  getFoodDetailsProps: PropTypes.func.isRequired,
+  foodInfo: PropTypes.string.isRequired,
+};
