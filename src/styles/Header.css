@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: grid;
+  grid-template: auto 0.8fr auto / auto 0.8fr auto;
+  place-items: center;
+}
+

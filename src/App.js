@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
+import Header from './components/Header';
+import FoodDetails from './pages/FoodDetails';
 
 // import {
 //   Login,
@@ -24,11 +26,13 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <div id="meals">
+    <>
+      <Header />
       <Switch>
+        <Route path="/comidas/:id" component={FoodDetails} />
         <Route exact path="/" component={Login} />
       </Switch>
-    </div>
+    </>
   );
 }
 

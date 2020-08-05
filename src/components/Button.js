@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = ({ children, disabled, onClick, test }) => (
-  <button onClick={onClick} disabled={disabled} data-testid={test}>
+  <button
+    type="button"
+    onClick={onClick}
+    disabled={disabled}
+    data-testid={test}
+  >
     {children}
   </button>
 );
