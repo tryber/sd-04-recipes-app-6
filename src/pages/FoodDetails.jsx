@@ -13,34 +13,34 @@ const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
     );
   }, []);
   const getNumberOfIngredients = () => {
-    let ingredientsNumber = [];
-    if (foodInfo.length > 0) {
-      ingredientsNumber = Object.keys(foodInfo[0]).filter((key) =>
-        key.includes('strIngredient')
-      );
-    }
+    const ingredientsNumber = Object.keys(foodInfo).filter((key) =>
+      key.includes('strIngredient')
+    );
+
     return ingredientsNumber;
   };
-  return (
-    <div>
-      <h3 data-testid="recipe-title" className="details-name">
-        {foodInfo.strMeal}
-      </h3>
-      <h4 data-testid="recipe-category">{foodInfo.strCategory}</h4>
-      {/* {console.log(
-        getNumberOfIngredients().filter(
-          (ingredientKey) => foodInfo[ingredientKey] !== ''
-        )
-      )} */}
-      <img
-        data-testid="recipe-photo"
-        className="details-img"
-        // alt={data.name}
-        // src={data.image}
-      />
-      <div></div>
-    </div>
-  );
+  if (Object.keys(foodInfo).length > 0) {
+    return (
+      <div>
+        <h3 data-testid="recipe-title" className="details-name">
+          {foodInfo.strMeal}
+        </h3>
+        <h4 data-testid="recipe-category">{foodInfo.strCategory}</h4>
+
+        {getNumberOfIngredients().map((ingredientKey, index) => {
+          if (foodInfo[ingredientKey] !== '') {
+            return (
+              <p data-testid={`${index}-ingredient-name-and-measure`}>
+                {foodInfo[ingredientKey]} - {foodInfo[`strMeasure${index + 1}`]}
+              </p>
+            );
+          }
+        })}
+        <p data-testid="instructions">{foodInfo.strInstructions}</p>
+      </div>
+    );
+  }
+  return <div>oi</div>;
 };
 
 const mapState = (state) => ({
