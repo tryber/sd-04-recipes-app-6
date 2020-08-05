@@ -20,12 +20,10 @@ const requestFoodOrDrinksSuccess = (data) => ({
   data,
 });
 
-export const getFoodsAndDrinks = (url) => {
-  return (dispatch) => {
-    dispatch(requestFoodOrDrinks());
-    return getRecipesAPI(url).then(
-      (data) => dispatch(requestFoodOrDrinksSuccess(data)),
-      (error) => dispatch(requestFoodOrDrinksFailure(error))
-    );
-  };
+export const getFoodsAndDrinks = (url) => (dispatch) => {
+  dispatch(requestFoodOrDrinks());
+  return getRecipesAPI(url).then(
+    (data) => dispatch(requestFoodOrDrinksSuccess(data)),
+    (error) => dispatch(requestFoodOrDrinksFailure(error)),
+  );
 };

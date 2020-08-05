@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-fragments */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -26,13 +27,13 @@ import FoodDetails from './pages/FoodDetails';
 
 function App() {
   return (
-    <>
+    <React.Fragment>
       <Header />
       <Switch>
         <Route path="/comidas/:id" component={FoodDetails} />
         <Route exact path="/" component={Login} />
       </Switch>
-    </>
+    </React.Fragment>
   );
 }
 

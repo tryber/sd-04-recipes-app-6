@@ -18,13 +18,10 @@ const requestFoodDetailsFailure = (error) => ({
   error,
 });
 
-
-export const getFoodDetails = (URL) => {
-  return (dispatch) => {
-    dispatch(requestFoodDetails());
-    return getRecipesAPI(URL).then(
-      (data) => dispatch(requestFoodDetailsSuccess(data.meals[0])),
-      (error) => dispatch(requestFoodDetailsFailure(error)),
-    );
-  };
+export const getFoodDetails = (URL) => (dispatch) => {
+  dispatch(requestFoodDetails());
+  return getRecipesAPI(URL).then(
+    (data) => dispatch(requestFoodDetailsSuccess(data.meals[0])),
+    (error) => dispatch(requestFoodDetailsFailure(error)),
+  );
 };

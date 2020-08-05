@@ -1,5 +1,5 @@
-const getRecipesAPI = () =>
-  fetch('https://swapi-trybe.herokuapp.com/api/planets/').then((response) =>
+const getRecipesAPI = (URL) =>
+  fetch(URL).then((response) =>
     response.json().then((json) => {
       if (response.ok) return Promise.resolve(json);
       return Promise.reject(json);
