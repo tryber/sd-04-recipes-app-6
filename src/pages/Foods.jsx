@@ -14,22 +14,28 @@ function Foods({ recipesFoods, dataFoods }) {
     recipesFoods(url);
   }, []);
 
-  let soma = 0;
   if (dataFoods !== undefined) {
     return (
       <div>
         <h1>Tela Principal Comidas</h1>
-        {recipesPagination(dataFoods, startPage, endPage).map((food, index) => {
-          return (
-            <RecipesCard
-              title={food.strMeal}
-              srcImagem={food.strMealThumb}
-              to={`/comidas/${food.idMeal}`}
-              testImage=""
-              testCard={`${index}-card-name`}
-            />
-          );
-        })}
+        {recipesPagination(dataFoods, startPage, endPage).map((food, index) => (
+          <RecipesCard
+            title={food.strMeal}
+            srcImagem={food.strMealThumb}
+            to={`/comidas/${food.idMeal}`}
+            testImage=""
+            testCard={`${index}-card-name`}
+          />
+        ))}
+
+        <button
+          onClick={() => {
+            setStartPage(startPage + 12);
+            setEndPage(endPage + 12);
+          }}
+        >
+          Proximo
+        </button>
       </div>
     );
   }
