@@ -7,3 +7,10 @@ nav {
   display: flex;
   flex-direction: column;
 }
+
+.title {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
