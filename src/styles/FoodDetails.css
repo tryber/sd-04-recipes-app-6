@@ -1,0 +1,25 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.recommendations-container {
+  align-items: center;
+  display: flex;
+  margin: 0 10vw;
+  overflow: auto;
+}
+
+.recommendations-card {
+  align-items: center;
+  display: flex;
+  flex: 1 0 50%;
+  flex-direction: column;
+}
