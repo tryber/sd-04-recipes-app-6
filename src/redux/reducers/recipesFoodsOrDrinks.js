@@ -14,6 +14,12 @@ const foodsOrDrinks = (state = INITIAL_STATE, action) => {
         isLoading: true,
       };
 
+    case REQUEST_FOODS_OR_DRINKS_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+      };
+
     case REQUEST_FOODS_OR_DRINKS_SUCCESS:
       return {
         ...state,
@@ -21,13 +27,9 @@ const foodsOrDrinks = (state = INITIAL_STATE, action) => {
         isLoading: false,
       };
 
-    case REQUEST_FOODS_OR_DRINKS_FAILURE:
-      return {
-        ...state,
-        error: action.error,
-      };
-
     default:
       return state;
   }
 };
+
+export default foodsOrDrinks;
