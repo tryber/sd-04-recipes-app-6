@@ -1,0 +1,7 @@
+.explore-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+  width: 360px;
+}
