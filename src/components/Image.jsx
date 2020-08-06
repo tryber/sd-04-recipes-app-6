@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
-const Image = ({ onClick, src, alt, test }) => (
-  <img onClick={onClick} src={src} alt={alt} data-testid={test} />
+const Image = ({ toProps, test, altProps, srcProps }) => (
+  <Link to={toProps} data-testid={test}>
+    <img
+      style={{ width: '25px', height: '20px' }}
+      alt={altProps}
+      src={srcProps}
+    />
+  </Link>
 );
 
 export default Image;
-
-Image.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  test: PropTypes.string.isRequired,
-};
