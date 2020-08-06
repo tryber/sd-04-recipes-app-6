@@ -40,8 +40,7 @@ const Login = () => {
       >
         Entrar
       </Button>
-      <Footer/>
-
+      <Footer />
     </div>
   );
 };
