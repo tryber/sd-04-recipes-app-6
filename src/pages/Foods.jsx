@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 
 function Foods({ recipesFoods, dataFoods }) {
@@ -8,18 +9,22 @@ function Foods({ recipesFoods, dataFoods }) {
   useEffect(() => {
     recipesFoods(url);
   }, []);
-  console.log(dataFoods);
 
+  let soma = 0;
   if (dataFoods !== undefined) {
     return (
       <div>
         <h1>Tela Principal Comidas</h1>
-        {dataFoods.map((food) => (
-          <div>
-            <img src={food.strMealThumb} />
-            <h1>{food.strMeal}</h1>
-          </div>
-        ))}
+        {dataFoods.map((food) => {
+          soma = soma + 1;
+          if (soma > 12) return <div></div>;
+          return (
+            <div>
+              <img src={food.strMealThumb} alt={food.strMeal} />
+              <h1>{food.strMeal}</h1>
+            </div>
+          );
+        })}
       </div>
     );
   }
@@ -35,3 +40,8 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Foods);
+
+Foods.propTypes = {
+  recipesFoods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataFoods: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

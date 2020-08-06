@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 
 function Drinks({ recipesDrinks, dataDrinks }) {
@@ -8,7 +9,6 @@ function Drinks({ recipesDrinks, dataDrinks }) {
   useEffect(() => {
     recipesDrinks(url);
   }, []);
-  console.log(dataDrinks);
 
   if (dataDrinks !== undefined) {
     return (
@@ -16,7 +16,7 @@ function Drinks({ recipesDrinks, dataDrinks }) {
         <h1>Tela Principal Bebidas</h1>
         {dataDrinks.map((drink) => (
           <div>
-            <img src={drink.strDrinkThumb} />
+            <img src={drink.strDrinkThumb} alt={drink.strDrink} />
             <h1>{drink.strDrink}</h1>
           </div>
         ))}
@@ -35,3 +35,8 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drinks);
+
+Drinks.propTypes = {
+  recipesDrinks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataDrinks: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
