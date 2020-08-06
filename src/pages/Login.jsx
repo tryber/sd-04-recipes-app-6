@@ -5,7 +5,6 @@ import Button from '../components/Button';
 import loginValidation from '../services/loginValidation';
 import { setLocalStorage } from '../services/localStorage';
 import '../App.css';
-import Footer from '../components/Footer';
 
 
 const Login = () => {
@@ -40,7 +39,6 @@ const Login = () => {
       >
         Entrar
       </Button>
-      <Footer />
     </div>
   );
 };
