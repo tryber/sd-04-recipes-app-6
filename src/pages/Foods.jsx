@@ -16,8 +16,8 @@ function Foods({ recipesFoods, dataFoods }) {
       <div>
         <h1>Tela Principal Comidas</h1>
         {dataFoods.map((food) => {
-          soma = soma + 1;
-          if (soma > 12) return <div></div>;
+          soma += 1;
+          if (soma > 12) return <div />;
           return (
             <div>
               <img src={food.strMealThumb} alt={food.strMeal} />
