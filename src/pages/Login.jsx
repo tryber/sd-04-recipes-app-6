@@ -4,17 +4,19 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import loginValidation from '../services/loginValidation';
 import { setLocalStorage } from '../services/localStorage';
+import '../App.css';
+import Footer from '../components/Footer';
+
 
 const Login = () => {
   const [email, setEmail] = useState(null);
-
   const [password, setPassword] = useState(null);
 
   const [isRedirect, setIsRedirect] = useState(false);
 
   if (isRedirect) return <Redirect to="/comidas" />;
   return (
-    <div>
+    <div id="Login">
       <h1>Login</h1>
       <Input
         test="email-input"
@@ -38,6 +40,7 @@ const Login = () => {
       >
         Entrar
       </Button>
+      <Footer />
     </div>
   );
 };
