@@ -12,7 +12,7 @@ const Login = () => {
 
   const [isRedirect, setIsRedirect] = useState(false);
 
-  if (isRedirect) return <Redirect to="/bebidas" />;
+  if (isRedirect) return <Redirect to="/comidas" />;
   return (
     <div>
       <h1>Login</h1>
