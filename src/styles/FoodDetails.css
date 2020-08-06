@@ -20,6 +20,6 @@
 .recommendations-card {
   align-items: center;
   display: flex;
-  flex-direction: column;
   flex: 1 0 50%;
+  flex-direction: column;
 }
