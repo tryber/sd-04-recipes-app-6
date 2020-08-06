@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFoodDetails } from '../redux/actions/foodDetails';
@@ -8,8 +8,7 @@ import replaceStringsYouTube from '../services/replaceStringsYouTube';
 import DrinkRecommendations from '../components/DrinkRecommendations';
 
 const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
-  // const { id } = useParams();
-  const id = 52882;
+  const { id } = useParams();
   useEffect(() => {
     getFoodDetailsProps(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
