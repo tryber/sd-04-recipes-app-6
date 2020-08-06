@@ -5,6 +5,7 @@ import './App.css';
 import Login from './pages/Login';
 import Header from './components/Header';
 import FoodDetails from './pages/FoodDetails';
+import Drinks from './pages/Drinks';
 
 // import {
 //   Login,
@@ -31,6 +32,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/comidas/:id" component={FoodDetails} />
+        <Route path="/bebidas" component={Drinks} />
         <Route exact path="/" component={Login} />
       </Switch>
     </React.Fragment>
