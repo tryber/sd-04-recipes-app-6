@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getCategory } from '../redux/actions/category';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
@@ -12,11 +13,9 @@ function onClick(event, getFoods, filterCategory, setFilterCategory) {
     newCategory === ''
       ? 'https://www.themealdb.com/api/json/v1/1/search.php?s='
       : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${newCategory}`;
-  console.log(filterCategory);
 
   setFilterCategory(newCategory);
-  console.log(filterCategory);
-  getFoods(url).then((data) => console.log(data));
+  // getFoods(url).then((data) => (data));
 }
 
 function Category({ getCategories, categories, getFoods }) {
@@ -26,26 +25,29 @@ function Category({ getCategories, categories, getFoods }) {
   }, []);
 
   const [filterCategory, setFilterCategory] = useState('');
+
   return (
     <div>
       {categories &&
         recipesPagination(categories.meals, 0, 5).map((el) => {
           return (
             <Button
-              children={el.strCategory}
               onClick={(event) => {
                 onClick(event, getFoods, filterCategory, setFilterCategory);
               }}
               key={el.strCategory}
-            />
+            >
+              {el.strCategory}
+            </Button>
           );
         })}
       <Button
-        children="All"
         onClick={(event) => {
           onClick(event, getFoods, filterCategory, setFilterCategory);
         }}
-      />
+      >
+        {'All'}
+      </Button>
     </div>
   );
 }
@@ -57,6 +59,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getCategories: getCategory,
   getFoods: getFoodsAndDrinks,
+};
+
+Category.propTypes = {
+  getCategories: PropTypes.func.isRequired,
+  categories: PropTypes.shape({
+    strCategory: PropTypes.string,
+    meal: PropTypes.string,
+  }).isRequired,
+  getFoods: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

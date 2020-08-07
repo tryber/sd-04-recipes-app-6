@@ -53,6 +53,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Drinks);
 
 Drinks.propTypes = {
-  recipesFoods: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dataFoods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  recipesDrinks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataDrinks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
