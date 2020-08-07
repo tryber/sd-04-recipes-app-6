@@ -15,7 +15,6 @@ Image.defaultProps = {
 };
 
 Image.propTypes = {
-  onClick: PropTypes.func.isRequired,
   width: PropTypes.string,
   to: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
