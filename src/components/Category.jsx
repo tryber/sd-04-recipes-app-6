@@ -1,21 +1,37 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { getCategory } from '../redux/actions/category'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getCategory } from '../redux/actions/category';
+import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
-function Category({ getCategories, categories }){
+function onClick(event, getFoods) {
+  const { innerText } = event.target;
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${innerText}`;
+  getFoods(url).then((data) => console.log(data));
+}
+
+function Category({ getCategories, categories, getFoods }) {
   const url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   useEffect(() => {
     getCategories(url);
-  }, [])
-    return (
-      <div>
-        {categories && recipesPagination(categories.meals, 0, 5).map((el) => {
-          return <Button >{el.strCategory}</Button>
+  }, []);
+  return (
+    <div>
+      {categories &&
+        recipesPagination(categories.meals, 0, 5).map((el) => {
+          return (
+            <Button
+              children={el.strCategory}
+              onClick={(event) => {
+                onClick(event, getFoods);
+              }}
+              key={el.strCategory}
+            />
+          );
         })}
-      </div>
-    )
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({
@@ -24,6 +40,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getCategories: getCategory,
-}
+  getFoods: getFoodsAndDrinks,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category)
+export default connect(mapStateToProps, mapDispatchToProps)(Category);
