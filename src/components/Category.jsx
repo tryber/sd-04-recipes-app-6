@@ -6,22 +6,6 @@ import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
-function onClick(
-  event,
-  getFoods,
-  filterCategory,
-  setFilterCategory,
-  urlFoodsOrDrinks,
-  urlFilterCategory,
-) {
-  const { innerText } = event.target;
-  const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
-  const urlSearch = newCategory === '' ? urlFoodsOrDrinks : `${urlFilterCategory}${newCategory}`;
-
-  setFilterCategory(newCategory);
-  getFoods(urlSearch).then((data) => data);
-}
-
 function Categories({
   urlFoodsOrDrinks,
   getCategories,
@@ -36,7 +20,14 @@ function Categories({
   }, []);
 
   const [filterCategory, setFilterCategory] = useState('');
+  function changeCategories(event) {
+    const { innerText } = event.target;
+    const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
+    const urlSearch = newCategory === '' ? urlFoodsOrDrinks : `${urlFilterCategory}${newCategory}`;
 
+    setFilterCategory(newCategory);
+    getFoods(urlSearch).then((data) => data);
+  }
   if (categories === null) return <div />;
   const listCategories = isPageFood ? categories.meals : categories.drinks;
 
@@ -46,14 +37,7 @@ function Categories({
         recipesPagination(listCategories, 0, 5).map((el) => (
           <Button
             onClick={(event) => {
-              onClick(
-                event,
-                getFoods,
-                filterCategory,
-                setFilterCategory,
-                urlFoodsOrDrinks,
-                urlFilterCategory,
-              );
+              changeCategories(event);
             }}
             key={el.strCategory}
           >
@@ -62,14 +46,7 @@ function Categories({
         ))}
       <Button
         onClick={(event) => {
-          onClick(
-            event,
-            getFoods,
-            filterCategory,
-            setFilterCategory,
-            urlFoodsOrDrinks,
-            urlFilterCategory,
-          );
+          changeCategories(event);
         }}
       >
         {'All'}
@@ -94,6 +71,8 @@ Categories.propTypes = {
     meal: PropTypes.string,
   }).isRequired,
   getFoods: PropTypes.func.isRequired,
+  urlFoodsOrDrinks: PropTypes.string.isRequired,
+  urlCategory: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
