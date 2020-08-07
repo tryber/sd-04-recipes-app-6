@@ -24,6 +24,7 @@ function Foods({ recipesFoods, dataFoods }) {
           urlFoodsOrDrinks={url}
           urlFilterCategory={'https://www.themealdb.com/api/json/v1/1/filter.php?c='}
           urlCategory={'https://www.themealdb.com/api/json/v1/1/list.php?c=list'}
+          isPageFood={true}
         />
         {recipesPagination(dataFoods, startPage, endPage).map((food, index) => (
           <RecipesCard

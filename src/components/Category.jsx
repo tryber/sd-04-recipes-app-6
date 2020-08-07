@@ -29,6 +29,7 @@ function Categories({
   getFoods,
   urlCategory,
   urlFilterCategory,
+  isPageFood,
 }) {
   useEffect(() => {
     getCategories(urlCategory);
@@ -36,10 +37,13 @@ function Categories({
 
   const [filterCategory, setFilterCategory] = useState('');
 
+  if (categories === null) return <div />;
+  const listCategories = isPageFood ? categories.meals : categories.drinks;
+
   return (
     <div>
       {categories &&
-        recipesPagination(categories.meals, 0, 5).map((el) => (
+        recipesPagination(listCategories, 0, 5).map((el) => (
           <Button
             onClick={(event) => {
               onClick(

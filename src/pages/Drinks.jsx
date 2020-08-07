@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import RecipesCard from '../components/RecipesCard';
-// import Categories from '../components/Category';
+import Categories from '../components/Category';
 import Footer from '../components/Footer';
 import recipesPagination from '../services/recipesPagination';
 import Button from '../components/Button';
@@ -21,9 +21,15 @@ function Drinks({ recipesDrinks, dataDrinks }) {
     return (
       <div>
         <h1>Tela Principal Bebidas</h1>
+        <Categories
+          urlFoodsOrDrinks={url}
+          urlFilterCategory={'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='}
+          urlCategory={'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'}
+          isPageFood={false}
+        />
         {recipesPagination(dataDrinks, startPage, endPage).map((drink, index) => (
-          // <Categories />
           <RecipesCard
+            key={drink.strDrink}
             title={drink.strDrink}
             srcImagem={drink.strDrinkThumb}
             to={`/comidas/${drink.idDrink}`}
