@@ -48,7 +48,8 @@ const Categories = ({
     <div>
       {categories &&
         recipesPagination(listCategories, 0, 5).map((el) => (
-          <Button test={`${el.strCategory}-category-filter`}
+          <Button
+            test={`${el.strCategory}-category-filter`}
             onClick={(event) => {
               changeCategories(event);
             }}
@@ -82,7 +83,8 @@ Categories.propTypes = {
   getCategories: PropTypes.func.isRequired,
   categories: PropTypes.shape({
     strCategory: PropTypes.string,
-    meal: PropTypes.string,
+    meals: PropTypes.string,
+    drinks: PropTypes.string,
   }).isRequired,
   getFoods: PropTypes.func.isRequired,
   urlFoodsOrDrinks: PropTypes.string.isRequired,

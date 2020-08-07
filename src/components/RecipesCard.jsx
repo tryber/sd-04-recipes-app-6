@@ -20,4 +20,5 @@ RecipesCard.propTypes = {
   srcImagem: PropTypes.string.isRequired,
   testImage: PropTypes.string.isRequired,
   testCard: PropTypes.string.isRequired,
+  testName: PropTypes.string.isRequired,
 };
