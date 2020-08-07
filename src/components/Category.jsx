@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getCategory } from '../redux/actions/category';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
-function onClick(event, getFoods) {
+function onClick(event, getFoods, filterCategory, setFilterCategory) {
   const { innerText } = event.target;
-  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${innerText}`;
+  const newCategory = innerText === filterCategory ? '' : innerText;
+  const url =
+    newCategory === ''
+      ? 'https://www.themealdb.com/api/json/v1/1/search.php?s='
+      : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${newCategory}`;
+  console.log(filterCategory);
+
+  setFilterCategory(newCategory);
+  console.log(filterCategory);
   getFoods(url).then((data) => console.log(data));
 }
 
@@ -16,6 +24,8 @@ function Category({ getCategories, categories, getFoods }) {
   useEffect(() => {
     getCategories(url);
   }, []);
+
+  const [filterCategory, setFilterCategory] = useState('');
   return (
     <div>
       {categories &&
@@ -24,7 +34,7 @@ function Category({ getCategories, categories, getFoods }) {
             <Button
               children={el.strCategory}
               onClick={(event) => {
-                onClick(event, getFoods);
+                onClick(event, getFoods, filterCategory, setFilterCategory);
               }}
               key={el.strCategory}
             />
