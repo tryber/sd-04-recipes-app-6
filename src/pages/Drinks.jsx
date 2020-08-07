@@ -11,7 +11,7 @@ import Button from '../components/Button';
 function Drinks({ recipesDrinks, dataDrinks }) {
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const [startPage, setStartPage] = useState(0);
-  const [endPage, setEndPage] = useState(11);
+  const [endPage, setEndPage] = useState(12);
 
   useEffect(() => {
     recipesDrinks(url);

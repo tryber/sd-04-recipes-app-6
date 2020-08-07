@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 function Foods({ recipesFoods, dataFoods }) {
   const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const [startPage, setStartPage] = useState(0);
-  const [endPage, setEndPage] = useState(11);
+  const [endPage, setEndPage] = useState(12);
 
   useEffect(() => {
     recipesFoods(url);
