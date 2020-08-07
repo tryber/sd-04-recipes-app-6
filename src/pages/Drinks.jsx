@@ -37,7 +37,6 @@ function Drinks({ recipesDrinks, dataDrinks }) {
             testCard={`${index}-card-name`}
           />
         ))}
-
         <Button
           onClick={() => {
             setStartPage(startPage + 12);
@@ -46,6 +45,7 @@ function Drinks({ recipesDrinks, dataDrinks }) {
         >
           Proximo
         </Button>
+        <Footer />;
       </div>
     );
   }

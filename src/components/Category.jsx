@@ -6,7 +6,7 @@ import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
-function Categories({
+const Categories = ({
   urlFoodsOrDrinks,
   getCategories,
   categories,
@@ -14,7 +14,7 @@ function Categories({
   urlCategory,
   urlFilterCategory,
   isPageFood,
-}) {
+}) => {
   useEffect(() => {
     getCategories(urlCategory);
   }, []);
@@ -53,7 +53,7 @@ function Categories({
       </Button>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   categories: state.categories.recipesCategories,
@@ -73,6 +73,8 @@ Categories.propTypes = {
   getFoods: PropTypes.func.isRequired,
   urlFoodsOrDrinks: PropTypes.string.isRequired,
   urlCategory: PropTypes.string.isRequired,
+  isPagaeFood: PropTypes.bool.isRequired,
+  urlFilterCategory: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
