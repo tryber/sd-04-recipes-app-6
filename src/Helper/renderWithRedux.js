@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 import rootReducers from '../redux/reducers';
+import thunk from 'redux-thunk';
 
 const renderWithRedux = (
   component,
-  { initialState, store = createStore(rootReducers, initialState) } = {},
+  { initialState, store = createStore(rootReducers, applyMiddleware(thunk)) } = {},
 ) => ({
   ...render(<Provider store={store}>{component}</Provider>),
   store,

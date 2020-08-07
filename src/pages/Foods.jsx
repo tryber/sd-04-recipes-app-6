@@ -36,7 +36,6 @@ function Foods({ recipesFoods, dataFoods }) {
             testCard={`${index}-recipe-card`}
           />
         ))}
-
         <button
           onClick={() => {
             setStartPage(startPage + 12);
