@@ -4,10 +4,46 @@
   flex-direction: column;
 }
 
+.nav-title-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2vh 2vw;
+  width: 100%;
+}
+
+.nav-title-buttons img {
+  margin: 5px;
+}
+
+article {
+  margin: 2vh 2vw;
+}
+
+h4 , h3 {
+  margin: 0;
+}
+
 .details-container {
   align-items: center;
   display: flex;
   flex-direction: column;
+  max-height: 80vh;
+  min-height: 50vh;
+  overflow: auto;
+}
+
+.button-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 5vh;
+}
+
+.button-container button {
+  margin: 0;
+  width: 120px;
 }
 
 .recommendations-container {

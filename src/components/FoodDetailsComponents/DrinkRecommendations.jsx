@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRecommendations } from '../redux/actions/recommendations';
-import Image from './Image';
-import '../styles/FoodDetails.css';
+import { getRecommendations } from '../../redux/actions/recommendations';
+import Image from '../Image';
+import '../../styles/FoodDetails.css';
 
 const DrinkRecommendations = ({
   getRecommendationsProps,
