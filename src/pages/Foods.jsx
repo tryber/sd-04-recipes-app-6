@@ -6,7 +6,6 @@ import RecipesCard from '../components/RecipesCard';
 import recipesPagination from '../services/recipesPagination';
 import Categories from '../components/Category';
 import Footer from '../components/Footer';
-import Button from '../components/Button';
 
 function Foods({ recipesFoods, dataFoods }) {
   const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -32,14 +31,14 @@ function Foods({ recipesFoods, dataFoods }) {
           />
         ))}
 
-        <Button
+        <button
           onClick={() => {
             setStartPage(startPage + 12);
             setEndPage(endPage + 12);
           }}
         >
           Proximo
-        </Button>
+        </button>
         <Footer />
       </div>
     );

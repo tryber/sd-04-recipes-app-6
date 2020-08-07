@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import RecipesCard from '../components/RecipesCard';
+import Categories from '../components/Category';
+import Footer from '../components/Footer';
 import recipesPagination from '../services/recipesPagination';
 import Button from '../components/Button';
 
