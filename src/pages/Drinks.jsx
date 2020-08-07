@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import RecipesCard from '../components/RecipesCard';
 import recipesPagination from '../services/recipesPagination';
+import Button from '../components/Button';
 
 function Drinks({ recipesDrinks, dataDrinks }) {
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -28,14 +29,14 @@ function Drinks({ recipesDrinks, dataDrinks }) {
           />
         ))}
 
-        <button
+        <Button
           onClick={() => {
             setStartPage(startPage + 12);
             setEndPage(endPage + 12);
           }}
         >
           Proximo
-        </button>
+        </Button>
       </div>
     );
   }
