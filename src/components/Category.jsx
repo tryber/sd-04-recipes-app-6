@@ -7,7 +7,7 @@ import Button from './Button';
 
 function onClick(event, getFoods, filterCategory, setFilterCategory) {
   const { innerText } = event.target;
-  const newCategory = innerText === filterCategory ? '' : innerText;
+  const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
   const url =
     newCategory === ''
       ? 'https://www.themealdb.com/api/json/v1/1/search.php?s='
@@ -40,6 +40,12 @@ function Category({ getCategories, categories, getFoods }) {
             />
           );
         })}
+      <Button
+        children="All"
+        onClick={(event) => {
+          onClick(event, getFoods, filterCategory, setFilterCategory);
+        }}
+      />
     </div>
   );
 }
