@@ -31,8 +31,9 @@ function Foods({ recipesFoods, dataFoods }) {
             title={food.strMeal}
             srcImagem={food.strMealThumb}
             to={`/comidas/${food.idMeal}`}
-            testImage=""
-            testCard={`${index}-card-name`}
+            testImage={`${index}-card-img`}
+            testName={`${index}-card-name`}
+            testCard={`${index}-recipe-card`}
           />
         ))}
 
