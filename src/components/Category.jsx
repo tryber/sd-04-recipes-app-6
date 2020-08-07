@@ -15,7 +15,7 @@ function onClick(event, getFoods, filterCategory, setFilterCategory) {
       : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${newCategory}`;
 
   setFilterCategory(newCategory);
-  // getFoods(url).then((data) => (data));
+  getFoods(url).then((data) => data);
 }
 
 function Category({ getCategories, categories, getFoods }) {
@@ -29,18 +29,16 @@ function Category({ getCategories, categories, getFoods }) {
   return (
     <div>
       {categories &&
-        recipesPagination(categories.meals, 0, 5).map((el) => {
-          return (
-            <Button
-              onClick={(event) => {
-                onClick(event, getFoods, filterCategory, setFilterCategory);
-              }}
-              key={el.strCategory}
-            >
-              {el.strCategory}
-            </Button>
-          );
-        })}
+        recipesPagination(categories.meals, 0, 5).map((el) => (
+          <Button
+            onClick={(event) => {
+              onClick(event, getFoods, filterCategory, setFilterCategory);
+            }}
+            key={el.strCategory}
+          >
+            {el.strCategory}
+          </Button>
+        ))}
       <Button
         onClick={(event) => {
           onClick(event, getFoods, filterCategory, setFilterCategory);
