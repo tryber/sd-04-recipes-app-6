@@ -23,8 +23,8 @@ function Drinks({ recipesDrinks, dataDrinks }) {
         <h1>Tela Principal Bebidas</h1>
         <Categories
           urlFoodsOrDrinks={url}
-          urlFilterCategory='https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='
-          urlCategory='https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'
+          urlFilterCategory="https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="
+          urlCategory="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
           isPageFood={false}
         />
         {recipesPagination(dataDrinks, startPage, endPage).map(
@@ -38,7 +38,7 @@ function Drinks({ recipesDrinks, dataDrinks }) {
               testName={`${index}-card-name`}
               testCard={`${index}-recipe-card`}
             />
-          )
+          ),
         )}
         <Button
           onClick={() => {
