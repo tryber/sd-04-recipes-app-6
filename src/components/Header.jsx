@@ -4,6 +4,7 @@ import searchIcon from '../images/searchIcon.svg';
 import Image from './Image';
 import '../styles/Header.css';
 import SearchBar from './SearchBar';
+import Button from './Button';
 
 const Header = () => {
   const [searchBar, setSearchBar] = useState(false);
@@ -17,7 +18,9 @@ const Header = () => {
           test="profile-top-btn"
         />
         <h2 data-testid="page-title">Título da página</h2>
-        <Image onClick={() => setSearchBar(!searchBar)} src={searchIcon} alt="search icon" test="search-top-btn" />
+        <Button onClick={() => setSearchBar(!searchBar)}>
+          <Image src={searchIcon} alt="search icon" test="search-top-btn" />
+        </Button>
       </div>
       {searchBar && <SearchBar />}
     </header>

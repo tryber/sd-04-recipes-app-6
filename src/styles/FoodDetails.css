@@ -21,8 +21,7 @@ article {
   margin: 2vh 2vw;
 }
 
-.nav-title-buttons h3,
-h4 {
+h4 , h3 {
   margin: 0;
 }
 
@@ -30,16 +29,16 @@ h4 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: 50vh;
   max-height: 80vh;
+  min-height: 50vh;
   overflow: auto;
 }
 
 .button-container {
   align-items: center;
   display: flex;
-  min-height: 5vh;
   justify-content: center;
+  min-height: 5vh;
 }
 
 .button-container button {

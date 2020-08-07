@@ -8,6 +8,7 @@ import FoodDetails from './pages/FoodDetails';
 import Drinks from './pages/Drinks';
 import Foods from './pages/Foods';
 import FoodsInProgress from './pages/FoodsInProgress';
+import DrinksInProgress from './pages/FoodsInProgress';
 import DrinkDetails from './pages/DrinkDetails';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/comidas/:id/in-progress" component={FoodsInProgress} />
+        <Route path="/bebidas/:id/in-progress" component={DrinksInProgress} />
         <Route path="/comidas/:id" component={FoodDetails} />
         <Route path="/bebidas/:id" component={DrinkDetails} />
         <Route path="/comidas" component={Foods} />

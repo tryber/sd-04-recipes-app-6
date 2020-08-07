@@ -71,7 +71,7 @@ const FoodDetails = ({
           <Button
             onClick={() => {
               addToInProgress(drinkInfo.idDrink, getIngredientsArray());
-              history.push(`/comidas/${drinkInfo.idDrink}/in-progress`);
+              history.push(`/bebidas/${drinkInfo.idDrink}/in-progress`);
             }}
             test="start-recipe-btn"
           >
