@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import RecipesCard from '../components/RecipesCard';
 import recipesPagination from '../services/recipesPagination';
+import Categories from '../components/Category';
+import Footer from '../components/Footer';
 
 function Foods({ recipesFoods, dataFoods }) {
   const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const [startPage, setStartPage] = useState(0);
-  const [endPage, setEndPage] = useState(11);
+  const [endPage, setEndPage] = useState(12);
 
   useEffect(() => {
     recipesFoods(url);
@@ -18,6 +20,12 @@ function Foods({ recipesFoods, dataFoods }) {
     return (
       <div>
         <h1>Tela Principal Comidas</h1>
+        <Categories
+          urlFoodsOrDrinks={url}
+          urlFilterCategory={'https://www.themealdb.com/api/json/v1/1/filter.php?c='}
+          urlCategory={'https://www.themealdb.com/api/json/v1/1/list.php?c=list'}
+          isPageFood
+        />
         {recipesPagination(dataFoods, startPage, endPage).map((food, index) => (
           <RecipesCard
             title={food.strMeal}
@@ -36,6 +44,7 @@ function Foods({ recipesFoods, dataFoods }) {
         >
           Proximo
         </button>
+        <Footer />
       </div>
     );
   }
