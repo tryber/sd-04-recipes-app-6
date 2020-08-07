@@ -7,16 +7,16 @@ import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
 function newCategory(innerText, filterCategory) {
-  const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
-  return newCategory;
+  const category = innerText === filterCategory || innerText === 'All' ? '' : innerText;
+  return category;
 }
 
 function urlSearch(urlFoodsOrDrinks, urlFilterCategory, innerText, filterCategory) {
-  const urlSearch =
+  const url =
     newCategory(innerText, filterCategory) === ''
       ? urlFoodsOrDrinks
       : `${urlFilterCategory}${newCategory(innerText, filterCategory)}`;
-  return urlSearch;
+  return url;
 }
 
 const Categories = ({
