@@ -7,32 +7,17 @@ import Header from './components/Header';
 import FoodDetails from './pages/FoodDetails';
 import Drinks from './pages/Drinks';
 import Foods from './pages/Foods';
-
-// import {
-//   Login,
-//   Foods,
-//   Drinks,
-//   FoodsDetail,
-//   DrinkDetail,
-//   FoodsProcess,
-//   DrinkProcess,
-//   Explore,
-//   ExploreFood,
-//   ExploreDrink,
-//   FoodIngredients,
-//   DrinkIngredients,
-//   FoodArea,
-//   Profile,
-//   CookedRecipes,
-//   FavoriteRecipes,
-// } from './pages';
+import FoodsInProgress from './pages/FoodsInProgress';
+import DrinkDetails from './pages/DrinkDetails';
 
 function App() {
   return (
     <React.Fragment>
       <Header />
       <Switch>
+        <Route path="/comidas/:id/in-progress" component={FoodsInProgress} />
         <Route path="/comidas/:id" component={FoodDetails} />
+        <Route path="/bebidas/:id" component={DrinkDetails} />
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
         <Route exact path="/" component={Login} />

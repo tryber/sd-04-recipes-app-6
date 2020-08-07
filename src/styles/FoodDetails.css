@@ -4,10 +4,47 @@
   flex-direction: column;
 }
 
+.nav-title-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2vh 2vw;
+  width: 100%;
+}
+
+.nav-title-buttons img {
+  margin: 5px;
+}
+
+article {
+  margin: 2vh 2vw;
+}
+
+.nav-title-buttons h3,
+h4 {
+  margin: 0;
+}
+
 .details-container {
   align-items: center;
   display: flex;
   flex-direction: column;
+  min-height: 50vh;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.button-container {
+  align-items: center;
+  display: flex;
+  min-height: 5vh;
+  justify-content: center;
+}
+
+.button-container button {
+  margin: 0;
+  width: 120px;
 }
 
 .recommendations-container {
