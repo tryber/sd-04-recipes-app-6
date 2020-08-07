@@ -6,22 +6,32 @@ import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
-function onClick(event, getFoods, filterCategory, setFilterCategory) {
+function onClick(
+  event,
+  getFoods,
+  filterCategory,
+  setFilterCategory,
+  urlFoodsOrDrinks,
+  urlFilterCategory,
+) {
   const { innerText } = event.target;
   const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
-  const url =
-    newCategory === ''
-      ? 'https://www.themealdb.com/api/json/v1/1/search.php?s='
-      : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${newCategory}`;
+  const urlSearch = newCategory === '' ? urlFoodsOrDrinks : `${urlFilterCategory}${newCategory}`;
 
   setFilterCategory(newCategory);
-  getFoods(url).then((data) => data);
+  getFoods(urlSearch).then((data) => data);
 }
 
-function Category({ getCategories, categories, getFoods }) {
-  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+function Categories({
+  urlFoodsOrDrinks,
+  getCategories,
+  categories,
+  getFoods,
+  urlCategory,
+  urlFilterCategory,
+}) {
   useEffect(() => {
-    getCategories(url);
+    getCategories(urlCategory);
   }, []);
 
   const [filterCategory, setFilterCategory] = useState('');
@@ -32,7 +42,14 @@ function Category({ getCategories, categories, getFoods }) {
         recipesPagination(categories.meals, 0, 5).map((el) => (
           <Button
             onClick={(event) => {
-              onClick(event, getFoods, filterCategory, setFilterCategory);
+              onClick(
+                event,
+                getFoods,
+                filterCategory,
+                setFilterCategory,
+                urlFoodsOrDrinks,
+                urlFilterCategory,
+              );
             }}
             key={el.strCategory}
           >
@@ -41,7 +58,14 @@ function Category({ getCategories, categories, getFoods }) {
         ))}
       <Button
         onClick={(event) => {
-          onClick(event, getFoods, filterCategory, setFilterCategory);
+          onClick(
+            event,
+            getFoods,
+            filterCategory,
+            setFilterCategory,
+            urlFoodsOrDrinks,
+            urlFilterCategory,
+          );
         }}
       >
         {'All'}
@@ -59,7 +83,7 @@ const mapDispatchToProps = {
   getFoods: getFoodsAndDrinks,
 };
 
-Category.propTypes = {
+Categories.propTypes = {
   getCategories: PropTypes.func.isRequired,
   categories: PropTypes.shape({
     strCategory: PropTypes.string,
@@ -68,4 +92,4 @@ Category.propTypes = {
   getFoods: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

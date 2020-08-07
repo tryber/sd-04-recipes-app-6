@@ -20,7 +20,11 @@ function Foods({ recipesFoods, dataFoods }) {
     return (
       <div>
         <h1>Tela Principal Comidas</h1>
-        <Categories />
+        <Categories
+          urlFoodsOrDrinks={url}
+          urlFilterCategory={'https://www.themealdb.com/api/json/v1/1/filter.php?c='}
+          urlCategory={'https://www.themealdb.com/api/json/v1/1/list.php?c=list'}
+        />
         {recipesPagination(dataFoods, startPage, endPage).map((food, index) => (
           <RecipesCard
             title={food.strMeal}
