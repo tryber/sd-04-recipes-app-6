@@ -28,7 +28,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
-        test="login-submit-button"
+        test="login-submit-btn"
         disabled={loginValidation(email, password)}
         onClick={() => {
           setLocalStorage('mealsToken', 1);
