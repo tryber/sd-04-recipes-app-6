@@ -1,51 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import Image from './Image';
 import '../styles/Header.css';
-import Input from './Input';
+import SearchBar from './SearchBar';
 import Button from './Button';
 
-const Header = () => (
-  <header>
-    <div className="title">
-      <Image
-        to="/perfil"
-        src={profileIcon}
-        alt="profile icon"
-        test="profile-top-btn"
-      />
-      <h2 data-testid="page-title">Título da página</h2>
-      <Image src={searchIcon} alt="search icon" test="search-top-btn" />
-    </div>
-    <nav>
-      <Input test="search-input" />
-      <div>
-        <Input
-          test="ingredient-search-radio"
-          id="ingrediente"
-          type="radio"
-          name="tipo-de-busca"
+const Header = () => {
+  const [searchBar, setSearchBar] = useState(false);
+  return (
+    <header>
+      <div className="title">
+        <Image
+          to="/perfil"
+          src={profileIcon}
+          alt="profile icon"
+          test="profile-top-btn"
         />
-        <label htmlFor="ingrediente">Ingrediente</label>
-        <Input
-          test="name-search-radio"
-          id="nome"
-          type="radio"
-          name="tipo-de-busca"
-        />
-        <label htmlFor="nome">Nome</label>
-        <Input
-          id="primeira-letra"
-          test="first-letter-search-radio"
-          type="radio"
-          name="tipo-de-busca"
-        />
-        <label htmlFor="primeira-letra">Primeira letra</label>
+        <h2 data-testid="page-title">Título da página</h2>
+        <Button onClick={() => setSearchBar(!searchBar)}>
+          <Image src={searchIcon} alt="search icon" test="search-top-btn" />
+        </Button>
       </div>
-      <Button test="exec-search-btn" />
-    </nav>
-  </header>
-);
+      {searchBar && <SearchBar />}
+    </header>
+  );
+};
 
 export default Header;
