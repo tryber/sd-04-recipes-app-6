@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Image from './Image';
 
-const RecipesCard = ({ to, title, srcImagem, testImage, testCard }) => (
+const RecipesCard = ({ to, title, srcImagem, testImage, testCard, testName }) => (
   <Link to={to}>
     <div data-testid={testCard}>
       <Image to={to} src={srcImagem} alt={title} test={testImage} />
-      <h1>{title}</h1>
+      <h1 data-testid={testName}>{title}</h1>
     </div>
   </Link>
 );

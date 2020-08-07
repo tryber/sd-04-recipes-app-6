@@ -23,20 +23,27 @@ function Drinks({ recipesDrinks, dataDrinks }) {
         <h1>Tela Principal Bebidas</h1>
         <Categories
           urlFoodsOrDrinks={url}
-          urlFilterCategory={'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='}
-          urlCategory={'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'}
+          urlFilterCategory={
+            'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=',
+          }
+          urlCategory={
+            'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
+          }
           isPageFood={false}
         />
-        {recipesPagination(dataDrinks, startPage, endPage).map((drink, index) => (
-          <RecipesCard
-            key={drink.strDrink}
-            title={drink.strDrink}
-            srcImagem={drink.strDrinkThumb}
-            to={`/comidas/${drink.idDrink}`}
-            testImage=""
-            testCard={`${index}-card-name`}
-          />
-        ))}
+        {recipesPagination(dataDrinks, startPage, endPage).map(
+          (drink, index) => (
+            <RecipesCard
+              key={drink.strDrink}
+              title={drink.strDrink}
+              srcImagem={drink.strDrinkThumb}
+              to={`/bebidas/${drink.idDrink}`}
+              testImage={`${index}-card-img`}
+              testName={`${index}-card-name`}
+              testCard={`${index}-recipe-card`}
+            />
+          )
+        )}
         <Button
           onClick={() => {
             setStartPage(startPage + 12);

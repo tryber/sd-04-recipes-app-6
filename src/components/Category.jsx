@@ -48,7 +48,7 @@ const Categories = ({
     <div>
       {categories &&
         recipesPagination(listCategories, 0, 5).map((el) => (
-          <Button
+          <Button test={`${el.strCategory}-category-filter`}
             onClick={(event) => {
               changeCategories(event);
             }}
@@ -58,6 +58,7 @@ const Categories = ({
           </Button>
         ))}
       <Button
+        test="All-category-filter"
         onClick={(event) => {
           changeCategories(event);
         }}
