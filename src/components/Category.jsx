@@ -6,6 +6,19 @@ import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
 
+function newCategory(innerText, filterCategory) {
+  const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
+  return newCategory;
+}
+
+function urlSearch(urlFoodsOrDrinks, urlFilterCategory, innerText, filterCategory) {
+  const urlSearch =
+    newCategory(innerText, filterCategory) === ''
+      ? urlFoodsOrDrinks
+      : `${urlFilterCategory}${newCategory(innerText, filterCategory)}`;
+  return urlSearch;
+}
+
 const Categories = ({
   urlFoodsOrDrinks,
   getCategories,
@@ -22,11 +35,11 @@ const Categories = ({
   const [filterCategory, setFilterCategory] = useState('');
   function changeCategories(event) {
     const { innerText } = event.target;
-    const newCategory = innerText === filterCategory || innerText === 'All' ? '' : innerText;
-    const urlSearch = newCategory === '' ? urlFoodsOrDrinks : `${urlFilterCategory}${newCategory}`;
 
-    setFilterCategory(newCategory);
-    getFoods(urlSearch).then((data) => data);
+    setFilterCategory(newCategory(innerText, filterCategory));
+    getFoods(urlSearch(urlFoodsOrDrinks, urlFilterCategory, innerText, filterCategory)).then(
+      (data) => data,
+    );
   }
   if (categories === null) return <div />;
   const listCategories = isPageFood ? categories.meals : categories.drinks;
@@ -73,7 +86,7 @@ Categories.propTypes = {
   getFoods: PropTypes.func.isRequired,
   urlFoodsOrDrinks: PropTypes.string.isRequired,
   urlCategory: PropTypes.string.isRequired,
-  isPagaeFood: PropTypes.bool.isRequired,
+  isPageFood: PropTypes.bool.isRequired,
   urlFilterCategory: PropTypes.string.isRequired,
 };
 
