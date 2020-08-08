@@ -38,7 +38,7 @@ function Drinks({ recipesDrinks, dataDrinks, isLoading }) {
       <div className="container">
         {isLoading && <h3>Carregando...</h3>}
         {dataDrinks && dataDrinks.length > 0 && (
-          <>
+          <div>
             <Categories
               urlFoodsOrDrinks={url}
               urlFilterCategory="https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="
@@ -66,7 +66,7 @@ function Drinks({ recipesDrinks, dataDrinks, isLoading }) {
             >
               Proximo
             </Button>
-          </>
+          </div>
         )}
       </div>
       <Footer />

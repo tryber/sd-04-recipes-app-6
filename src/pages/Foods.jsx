@@ -37,7 +37,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
       <div className="container">
         {isLoading && <h3>Carregando...</h3>}
         {dataFoods && dataFoods.length !== 0 && (
-          <>
+          <div>
             <Categories
               urlFoodsOrDrinks={url}
               urlFilterCategory="https://www.themealdb.com/api/json/v1/1/filter.php?c="
@@ -65,7 +65,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
             >
               Proximo
             </button>
-          </>
+          </div>
         )}
       </div>
       <Footer />
