@@ -29,6 +29,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
+    return console.log('CC -> olhar isso depois');
   }, [dataFoods]);
 
   return (
