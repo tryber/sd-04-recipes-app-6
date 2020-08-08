@@ -29,8 +29,7 @@ h4 , h3 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  max-height: 80vh;
-  min-height: 50vh;
+  max-height: 90vh;
   overflow: auto;
 }
 
@@ -38,7 +37,9 @@ h4 , h3 {
   align-items: center;
   display: flex;
   justify-content: center;
-  min-height: 5vh;
+  height: 10vh;
+  position: fixed;
+  width: 100%;
 }
 
 .button-container button {
