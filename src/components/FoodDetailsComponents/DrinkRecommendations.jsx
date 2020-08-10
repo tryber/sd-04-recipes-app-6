@@ -11,7 +11,7 @@ const DrinkRecommendations = ({
 }) => {
   useEffect(() => {
     getRecommendationsProps(
-      'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
+      'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     );
   }, []);
   return (

@@ -16,8 +16,6 @@ import { updateLocalStorage, getLocalStorage } from '../services/localStorage';
 const FoodDetails = ({
   getDrinkDetailsAPI,
   drinkInfo,
-  doneRecipes,
-  inProgressDrinkRecipes,
   addToInProgress,
 }) => {
   const history = useHistory();
@@ -40,7 +38,7 @@ const FoodDetails = ({
   const getIngredientsArray = () =>
     getIngredients().map((key) => drinkInfo[key]);
 
-    const localProgressExist = getLocalStorage('inProgressFoodRecipes')
+  const localProgressExist = getLocalStorage('inProgressFoodRecipes')
     ? getLocalStorage('inProgressFoodRecipes').drinks
     : [];
 
@@ -92,8 +90,6 @@ const FoodDetails = ({
 
 const mapState = (state) => ({
   drinkInfo: state.foodOrDrinkDetails.details.drinks[0],
-  doneRecipes: state.recipesProgress.doneRecipes,
-  inProgressDrinkRecipes: state.recipesProgress.inProgressDrinkRecipes,
 });
 
 const mapDispatch = {
@@ -107,6 +103,4 @@ FoodDetails.propTypes = {
   getDrinkDetailsAPI: PropTypes.func.isRequired,
   addToInProgress: PropTypes.func.isRequired,
   drinkInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-  doneRecipes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  inProgressDrinkRecipes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
