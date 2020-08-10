@@ -19,7 +19,7 @@ function Foods({ recipesFoods, dataFoods }) {
 
   if (dataFoods !== undefined) {
     return (
-      <div className='centralizar'>
+      <div className="centralizar">
         <h1>Tela Principal Comidas</h1>
         <Categories
           urlFoodsOrDrinks={url}
@@ -31,17 +31,19 @@ function Foods({ recipesFoods, dataFoods }) {
           }
           isPageFood
         />
-        <div className='list'>
+        <div className="list">
           {recipesPagination(dataFoods, startPage, endPage).map(
             (food, index) => (
-              <div className='cardBorder'><RecipesCard
-                title={food.strMeal}
-                srcImagem={food.strMealThumb}
-                to={`/comidas/${food.idMeal}`}
-                testImage={`${index}-card-img`}
-                testName={`${index}-card-name`}
-                testCard={`${index}-recipe-card`}
-              /></div>
+              <div className="cardBorder">
+                <RecipesCard
+                  title={food.strMeal}
+                  srcImagem={food.strMealThumb}
+                  to={`/comidas/${food.idMeal}`}
+                  testImage={`${index}-card-img`}
+                  testName={`${index}-card-name`}
+                  testCard={`${index}-recipe-card`}
+                />
+              </div>
             )
           )}
         </div>

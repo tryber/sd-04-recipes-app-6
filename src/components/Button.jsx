@@ -20,4 +20,5 @@ Button.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   test: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
