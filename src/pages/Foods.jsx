@@ -6,6 +6,7 @@ import RecipesCard from '../components/RecipesCard';
 import recipesPagination from '../services/recipesPagination';
 import Categories from '../components/Category';
 import Footer from '../components/Footer';
+import '../styles/TelaPrincipal.css';
 
 function Foods({ recipesFoods, dataFoods }) {
   const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -18,24 +19,32 @@ function Foods({ recipesFoods, dataFoods }) {
 
   if (dataFoods !== undefined) {
     return (
-      <div>
+      <div className='centralizar'>
         <h1>Tela Principal Comidas</h1>
         <Categories
           urlFoodsOrDrinks={url}
-          urlFilterCategory={'https://www.themealdb.com/api/json/v1/1/filter.php?c='}
-          urlCategory={'https://www.themealdb.com/api/json/v1/1/list.php?c=list'}
+          urlFilterCategory={
+            'https://www.themealdb.com/api/json/v1/1/filter.php?c='
+          }
+          urlCategory={
+            'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+          }
           isPageFood
         />
-        {recipesPagination(dataFoods, startPage, endPage).map((food, index) => (
-          <RecipesCard
-            title={food.strMeal}
-            srcImagem={food.strMealThumb}
-            to={`/comidas/${food.idMeal}`}
-            testImage={`${index}-card-img`}
-            testName={`${index}-card-name`}
-            testCard={`${index}-recipe-card`}
-          />
-        ))}
+        <div className='list'>
+          {recipesPagination(dataFoods, startPage, endPage).map(
+            (food, index) => (
+              <div className='cardBorder'><RecipesCard
+                title={food.strMeal}
+                srcImagem={food.strMealThumb}
+                to={`/comidas/${food.idMeal}`}
+                testImage={`${index}-card-img`}
+                testName={`${index}-card-name`}
+                testCard={`${index}-recipe-card`}
+              /></div>
+            )
+          )}
+        </div>
 
         <button
           onClick={() => {
