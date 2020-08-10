@@ -10,13 +10,12 @@ import Button from '../components/Button';
 import Image from '../components/Image';
 import '../styles/FoodDetails.css';
 import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
-import { getDrinkDetails } from '../redux/actions/drinkDetails';
+import { getDetails } from '../redux/actions/foodOrDrinkDetails';
+import { updateLocalStorage, getLocalStorage } from '../services/localStorage';
 
 const FoodDetails = ({
   getDrinkDetailsAPI,
   drinkInfo,
-  doneRecipes,
-  inProgressDrinkRecipes,
   addToInProgress,
 }) => {
   const history = useHistory();
@@ -39,14 +38,19 @@ const FoodDetails = ({
   const getIngredientsArray = () =>
     getIngredients().map((key) => drinkInfo[key]);
 
-  const isDone = doneRecipes.find((recipe) => recipe.id === drinkInfo.idDrink);
-  const inProgress = inProgressDrinkRecipes.find(
-    (recipeObj) => Object.keys(recipeObj)[0] === drinkInfo.idDrink,
-  );
+  const localProgressExist = getLocalStorage('inProgressFoodRecipes')
+    ? getLocalStorage('inProgressFoodRecipes').drinks
+    : [];
+
+  const isDone =
+    getLocalStorage('doneRecipes') ||
+    [].find((recipe) => recipe.id === drinkInfo.idDrink);
+  const inProgress =
+    Object.keys(localProgressExist) || [].find((key) => key === drinkInfo.idDrink);
 
   return (
     <div>
-      {Object.keys(drinkInfo).length > 0 && (
+      {drinkInfo && (
         <div className="details-container">
           <Image
             width={`${100}%`}
@@ -56,7 +60,7 @@ const FoodDetails = ({
           />
           <TitleAndButtons
             title={drinkInfo.strDrink}
-            category={drinkInfo.strCategory}
+            category={drinkInfo.strAlcoholic}
           />
           <Ingredients
             ingredients={getIngredients()}
@@ -72,6 +76,7 @@ const FoodDetails = ({
             onClick={() => {
               addToInProgress(drinkInfo.idDrink, getIngredientsArray());
               history.push(`/bebidas/${drinkInfo.idDrink}/in-progress`);
+              updateLocalStorage('cocktails', drinkInfo.idDrink, getIngredientsArray());
             }}
             test="start-recipe-btn"
           >
@@ -84,13 +89,11 @@ const FoodDetails = ({
 };
 
 const mapState = (state) => ({
-  drinkInfo: state.drinkDetails.drinkInfo,
-  doneRecipes: state.recipesProgress.doneRecipes,
-  inProgressDrinkRecipes: state.recipesProgress.inProgressDrinkRecipes,
+  drinkInfo: state.foodOrDrinkDetails.details.drinks[0],
 });
 
 const mapDispatch = {
-  getDrinkDetailsAPI: getDrinkDetails,
+  getDrinkDetailsAPI: getDetails,
   addToInProgress: addInProgressDrink,
 };
 
@@ -100,6 +103,4 @@ FoodDetails.propTypes = {
   getDrinkDetailsAPI: PropTypes.func.isRequired,
   addToInProgress: PropTypes.func.isRequired,
   drinkInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-  doneRecipes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  inProgressDrinkRecipes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

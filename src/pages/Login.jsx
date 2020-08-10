@@ -6,7 +6,6 @@ import loginValidation from '../services/loginValidation';
 import { setLocalStorage } from '../services/localStorage';
 import '../App.css';
 
-
 const Login = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -23,6 +22,7 @@ const Login = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
+        type="password"
         test="password-input"
         placeholder="Digite sua senha"
         onChange={(e) => setPassword(e.target.value)}
