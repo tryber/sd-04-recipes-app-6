@@ -44,7 +44,7 @@ function Foods({ recipesFoods, dataFoods }) {
                   testCard={`${index}-recipe-card`}
                 />
               </div>
-            )
+            ),
           )}
         </div>
 

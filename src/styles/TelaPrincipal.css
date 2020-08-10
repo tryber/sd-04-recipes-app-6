@@ -3,13 +3,13 @@
 }
 
 .button {
-    border-radius: 4px;
-    border :1px solid #25692a;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 13px;
-    margin: 2px;
-    padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #25692a;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  margin: 2px;
+  padding: 6px 10px;
 }
 
 .list {
