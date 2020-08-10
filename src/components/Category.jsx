@@ -52,7 +52,7 @@ const Categories = ({
 
   return (
     <div>
-      {categories &&
+      {listCategories &&
         recipesPagination(listCategories, 0, 5).map((el) => (
           <Button
             test={`${el.strCategory}-category-filter`}

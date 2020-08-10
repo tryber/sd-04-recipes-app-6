@@ -13,10 +13,6 @@ const INITIAL_STATE = {
 const recipesProgress = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_IN_PROGRESS_FOOD:
-      setLocalStorage('inProgressRecipes', {
-        cocktails: { ...state.inProgressDrinkRecipes },
-        meals: { ...state.inProgressFoodRecipes, [action.id]: action.ingArray },
-      });
       return {
         ...state,
         inProgressFoodRecipes: [

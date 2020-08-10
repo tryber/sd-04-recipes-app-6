@@ -11,7 +11,7 @@ const DrinkRecommendations = ({
 }) => {
   useEffect(() => {
     getRecommendationsProps(
-      'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
     );
   }, []);
   return (
@@ -19,18 +19,38 @@ const DrinkRecommendations = ({
       <h4>Recomendadas</h4>
       <div className="recommendations-container">
         {drinksRecommendations &&
-          drinksRecommendations.drinks.slice(0, 6).map((drinkInfo, index) => (
-            <div
-              className="recommendations-card"
-              data-testid={`${index}-recomendation-card`}
-            >
-              {console.log(drinkInfo)}
-              <Image src={drinkInfo.strDrinkThumb} alt={drinkInfo.strDrink} />
-              <h4 data-testid={`${index}-recomendation-title`}>
-                {drinkInfo.strDrink}
-              </h4>
-            </div>
-          ))}
+          drinksRecommendations.drinks.slice(0, 6).map((drinkInfo, index) => {
+            if (index < 2) {
+              return (
+                <div
+                  key={drinkInfo.strDrink}
+                  className="recommendations-card"
+                  data-testid={`${index}-recomendation-card`}
+                >
+                  <Image
+                    src={drinkInfo.strDrinkThumb}
+                    alt={drinkInfo.strDrink}
+                  />
+                  <h4 data-testid={`${index}-recomendation-title`}>
+                    {drinkInfo.strDrink}
+                  </h4>
+                </div>
+              );
+            }
+            return (
+              <div
+                style={{ display: 'none' }}
+                key={drinkInfo.strDrink}
+                className="recommendations-card"
+                data-testid={`${index}-recomendation-card`}
+              >
+                <Image src={drinkInfo.strDrinkThumb} alt={drinkInfo.strDrink} />
+                <h4 data-testid={`${index}-recomendation-title`}>
+                  {drinkInfo.strDrink}
+                </h4>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
