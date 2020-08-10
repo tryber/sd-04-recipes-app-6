@@ -2,4 +2,17 @@ const setLocalStorage = (key, value) => localStorage.setItem(key, JSON.stringify
 
 const getLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
 
-export { setLocalStorage, getLocalStorage };
+const updateLocalStorage = (type, recipeId, ingArray) => {
+  const INITIAL_LOCAL = {
+    cocktails: {},
+    meals: {},
+  };
+  const recapLocal = getLocalStorage('inProgressRecipes') || INITIAL_LOCAL;
+  recapLocal[type] = {
+    ...recapLocal[type],
+    [recipeId]: ingArray,
+  };
+  setLocalStorage('inProgressRecipes', recapLocal);
+};
+
+export { setLocalStorage, getLocalStorage, updateLocalStorage };

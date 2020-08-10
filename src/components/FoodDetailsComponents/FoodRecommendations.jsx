@@ -20,6 +20,7 @@ const FoodRecommendations = ({
         {foodsRecommendations &&
           foodsRecommendations.meals.slice(0, 6).map((foodInfo, index) => (
             <div
+              key={foodInfo.strMeal}
               className="recommendations-card"
               data-testid={`${index}-recomendation-card`}
             >
