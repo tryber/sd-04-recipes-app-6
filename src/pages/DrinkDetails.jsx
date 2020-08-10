@@ -59,8 +59,12 @@ const FoodDetails = ({
             alt={drinkInfo.strDrink}
           />
           <TitleAndButtons
+            alcoholicOrNot={drinkInfo.strAlcoholic}
+            category={drinkInfo.strCategory}
+            id={drinkInfo.idDrink}
+            image={drinkInfo.strDrinkThumb}
             title={drinkInfo.strDrink}
-            category={drinkInfo.strAlcoholic}
+            type="bebida"
           />
           <Ingredients
             ingredients={getIngredients()}

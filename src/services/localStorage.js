@@ -1,4 +1,5 @@
-const setLocalStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+const setLocalStorage = (key, value) =>
+  localStorage.setItem(key, JSON.stringify(value));
 
 const getLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
 
@@ -15,4 +16,6 @@ const updateLocalStorage = (type, recipeId, ingArray) => {
   setLocalStorage('inProgressRecipes', recapLocal);
 };
 
-export { setLocalStorage, getLocalStorage, updateLocalStorage };
+const removeItem = (items, id) => items.filter((item) => item.id !== id);
+
+export { setLocalStorage, getLocalStorage, updateLocalStorage, removeItem };

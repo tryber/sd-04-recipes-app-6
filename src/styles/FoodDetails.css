@@ -13,6 +13,22 @@
   width: 100%;
 }
 
+.share-like-buttons-container {
+  display: flex;
+  justify-content: end;
+}
+
+.nav-title-buttons button {
+  background: none;
+  border: none;
+  margin: 0;
+  width: 80px;
+}
+
+p {
+  text-align: center;
+}
+
 .nav-title-buttons img {
   margin: 5px;
 }
@@ -21,7 +37,8 @@ article {
   margin: 2vh 2vw;
 }
 
-h4 , h3 {
+h4,
+h3 {
   margin: 0;
 }
 

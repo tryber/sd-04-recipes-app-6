@@ -60,8 +60,12 @@ const FoodDetails = ({
             alt={foodInfo.strMeal}
           />
           <TitleAndButtons
-            title={foodInfo.strMeal}
+            area={foodInfo.strArea}
             category={foodInfo.strCategory}
+            id={foodInfo.idMeal}
+            image={foodInfo.strMealThumb}
+            title={foodInfo.strMeal}
+            type="comida"
           />
           <Ingredients
             ingredients={getIngredients()}
