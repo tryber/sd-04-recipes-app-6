@@ -35,5 +35,3 @@ describe('Testes na tela principal', () => {
     ].forEach((title, index) => expect(getByTestId(`${index}-card-name`)).toHaveTextContent(title));
   });
 });
-
-// só para saber se não vai dar erro de novooooo, não aguento mais isso
