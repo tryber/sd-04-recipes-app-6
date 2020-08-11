@@ -40,7 +40,7 @@ const updateFavorite = (
   category,
   alcoholicOrNot,
   title,
-  image
+  image,
 ) => {
   const newFavorite = {
     id,
