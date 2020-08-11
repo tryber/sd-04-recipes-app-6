@@ -14,9 +14,7 @@
 
 .list {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex-flow: wrap;
+  flex-flow: row wrap;
 }
 
 .cardBorder {
