@@ -8,11 +8,17 @@ import Button from './Button';
 import '../styles/TelaPrincipal.css';
 
 function newCategory(innerText, filterCategory) {
-  const category = innerText === filterCategory || innerText === 'All' ? '' : innerText;
+  const category =
+    innerText === filterCategory || innerText === 'All' ? '' : innerText;
   return category;
 }
 
-function urlSearch(urlFoodsOrDrinks, urlFilterCategory, innerText, filterCategory) {
+function urlSearch(
+  urlFoodsOrDrinks,
+  urlFilterCategory,
+  innerText,
+  filterCategory,
+) {
   const url =
     newCategory(innerText, filterCategory) === ''
       ? urlFoodsOrDrinks
@@ -38,9 +44,9 @@ const Categories = ({
     const { innerText } = event.target;
 
     setFilterCategory(newCategory(innerText, filterCategory));
-    getFoods(urlSearch(urlFoodsOrDrinks, urlFilterCategory, innerText, filterCategory)).then(
-      (data) => data,
-    );
+    getFoods(
+      urlSearch(urlFoodsOrDrinks, urlFilterCategory, innerText, filterCategory),
+    ).then((data) => data);
   }
   if (categories === null) return <div />;
   const listCategories = isPageFood ? categories.meals : categories.drinks;
@@ -67,7 +73,7 @@ const Categories = ({
           changeCategories(event);
         }}
       >
-        {'All'}
+        All
       </Button>
     </div>
   );

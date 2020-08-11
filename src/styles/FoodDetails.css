@@ -13,6 +13,22 @@
   width: 100%;
 }
 
+.share-like-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-title-buttons button {
+  background: none;
+  border: none;
+  margin: 0;
+  width: 80px;
+}
+
+p {
+  text-align: center;
+}
+
 .nav-title-buttons img {
   margin: 5px;
 }
@@ -29,20 +45,21 @@ h4 , h3 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  max-height: 80vh;
-  min-height: 50vh;
-  overflow: auto;
+  max-height: 90vh;
 }
 
 .button-container {
   align-items: center;
   display: flex;
+  height: 10vh;
   justify-content: center;
-  min-height: 5vh;
+  width: 100%;
 }
 
 .button-container button {
+  bottom: 0;
   margin: 0;
+  position: fixed;
   width: 120px;
 }
 
@@ -50,7 +67,7 @@ h4 , h3 {
   align-items: center;
   display: flex;
   margin: 0 10vw;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .recommendations-card {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getFoodDetails } from '../redux/actions/foodDetails';
+import { getDetails } from '../redux/actions/foodOrDrinkDetails';
 import { addInProgressFood } from '../redux/actions/recipesProgress';
 import DrinkRecommendations from '../components/FoodDetailsComponents/DrinkRecommendations';
 import Instructions from '../components/FoodDetailsComponents/Instructions';
@@ -12,14 +12,9 @@ import Button from '../components/Button';
 import Image from '../components/Image';
 import '../styles/FoodDetails.css';
 import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
+import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
 
-const FoodDetails = ({
-  getFoodDetailsAPI,
-  foodInfo,
-  doneRecipes,
-  inProgressFoodRecipes,
-  addToInProgress,
-}) => {
+const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
@@ -40,14 +35,13 @@ const FoodDetails = ({
   const getIngredientsArray = () =>
     getIngredients().map((key) => foodInfo[key]);
 
-  const isDone = doneRecipes.find((recipe) => recipe.id === foodInfo.idMeal);
-  const inProgress = inProgressFoodRecipes.find(
-    (recipeObj) => Object.keys(recipeObj)[0] === foodInfo.idMeal,
-  );
+  const isDone =
+    getLocalStorage('doneRecipes') ||
+    [].find((recipe) => recipe.id === foodInfo.idMeal);
 
   return (
     <div>
-      {Object.keys(foodInfo).length > 0 && (
+      {foodInfo && (
         <div className="details-container">
           <Image
             width={`${100}%`}
@@ -56,8 +50,12 @@ const FoodDetails = ({
             alt={foodInfo.strMeal}
           />
           <TitleAndButtons
-            title={foodInfo.strMeal}
+            area={foodInfo.strArea}
             category={foodInfo.strCategory}
+            id={foodInfo.idMeal}
+            image={foodInfo.strMealThumb}
+            title={foodInfo.strMeal}
+            type="comida"
           />
           <Ingredients
             ingredients={getIngredients()}
@@ -77,10 +75,15 @@ const FoodDetails = ({
             onClick={() => {
               addToInProgress(foodInfo.idMeal, getIngredientsArray());
               history.push(`/comidas/${foodInfo.idMeal}/in-progress`);
+              updateLocalStorage(
+                'meals',
+                foodInfo.idMeal,
+                getIngredientsArray(),
+              );
             }}
             test="start-recipe-btn"
           >
-            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+            {checkInProgress(id, 'meals') ? 'Continuar Receita' : 'Iniciar Receita'}
           </Button>
         </div>
       )}
@@ -89,13 +92,11 @@ const FoodDetails = ({
 };
 
 const mapState = (state) => ({
-  foodInfo: state.foodDetails.foodInfo,
-  doneRecipes: state.recipesProgress.doneRecipes,
-  inProgressFoodRecipes: state.recipesProgress.inProgressFoodRecipes,
+  foodInfo: state.foodOrDrinkDetails.details.meals[0],
 });
 
 const mapDispatch = {
-  getFoodDetailsAPI: getFoodDetails,
+  getFoodDetailsAPI: getDetails,
   addToInProgress: addInProgressFood,
 };
 
@@ -105,6 +106,4 @@ FoodDetails.propTypes = {
   getFoodDetailsAPI: PropTypes.func.isRequired,
   addToInProgress: PropTypes.func.isRequired,
   foodInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-  doneRecipes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  inProgressFoodRecipes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
