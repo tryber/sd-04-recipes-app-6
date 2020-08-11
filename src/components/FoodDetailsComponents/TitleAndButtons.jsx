@@ -7,7 +7,7 @@ import FavoriteWhite from '../../images/whiteHeartIcon.svg';
 import FavoriteBlack from '../../images/blackHeartIcon.svg';
 import ShareButton from '../../images/shareIcon.svg';
 import Button from '../Button';
-import { updateFavorite, checkFavorite } from '../../services/localStorage';
+import { updateFavorite, checkExistenceInLocal } from '../../services/localStorage';
 
 const TitleAndButtons = ({
   alcoholicOrNot = '',
@@ -62,7 +62,7 @@ const TitleAndButtons = ({
             <Image
               width={`${35}%`}
               test="favorite-btn"
-              src={checkFavorite(id) ? FavoriteBlack : FavoriteWhite}
+              src={checkExistenceInLocal(id, 'favoriteRecipes') ? FavoriteBlack : FavoriteWhite}
               alt="favorite-icon-button"
             />
           </Button>

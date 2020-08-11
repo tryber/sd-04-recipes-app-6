@@ -11,13 +11,9 @@ import Image from '../components/Image';
 import '../styles/FoodDetails.css';
 import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
 import { getDetails } from '../redux/actions/foodOrDrinkDetails';
-import { updateLocalStorage, getLocalStorage } from '../services/localStorage';
+import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
 
-const FoodDetails = ({
-  getDrinkDetailsAPI,
-  drinkInfo,
-  addToInProgress,
-}) => {
+const FoodDetails = ({ getDrinkDetailsAPI, drinkInfo, addToInProgress }) => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
@@ -38,15 +34,9 @@ const FoodDetails = ({
   const getIngredientsArray = () =>
     getIngredients().map((key) => drinkInfo[key]);
 
-  const localProgressExist = getLocalStorage('inProgressFoodRecipes')
-    ? getLocalStorage('inProgressFoodRecipes').drinks
-    : [];
-
   const isDone =
     getLocalStorage('doneRecipes') ||
     [].find((recipe) => recipe.id === drinkInfo.idDrink);
-  const inProgress =
-    Object.keys(localProgressExist) || [].find((key) => key === drinkInfo.idDrink);
 
   return (
     <div>
@@ -84,7 +74,7 @@ const FoodDetails = ({
             }}
             test="start-recipe-btn"
           >
-            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+            {checkInProgress(id, 'cocktails') ? 'Continuar Receita' : 'Iniciar Receita'}
           </Button>
         </div>
       )}

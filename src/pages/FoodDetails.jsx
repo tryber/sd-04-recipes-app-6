@@ -12,13 +12,9 @@ import Button from '../components/Button';
 import Image from '../components/Image';
 import '../styles/FoodDetails.css';
 import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
-import { updateLocalStorage, getLocalStorage } from '../services/localStorage';
+import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
 
-const FoodDetails = ({
-  getFoodDetailsAPI,
-  foodInfo,
-  addToInProgress,
-}) => {
+const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
@@ -39,15 +35,9 @@ const FoodDetails = ({
   const getIngredientsArray = () =>
     getIngredients().map((key) => foodInfo[key]);
 
-  const localProgressExist = getLocalStorage('inProgressFoodRecipes')
-    ? getLocalStorage('inProgressFoodRecipes').meals
-    : [];
-
   const isDone =
     getLocalStorage('doneRecipes') ||
     [].find((recipe) => recipe.id === foodInfo.idMeal);
-  const inProgress =
-    Object.keys(localProgressExist) || [].find((key) => key === foodInfo.idMeal);
 
   return (
     <div>
@@ -93,7 +83,7 @@ const FoodDetails = ({
             }}
             test="start-recipe-btn"
           >
-            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+            {checkInProgress(id, 'meals') ? 'Continuar Receita' : 'Iniciar Receita'}
           </Button>
         </div>
       )}

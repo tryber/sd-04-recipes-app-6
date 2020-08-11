@@ -18,9 +18,19 @@ const updateLocalStorage = (type, recipeId, ingArray) => {
 
 const removeItem = (items, id) => items.filter((item) => item.id !== id);
 
-const checkFavorite = (id) => {
-  const getFavorites = getLocalStorage('favoriteRecipes') || [];
-  return getFavorites.find((favoriteObj) => favoriteObj.id === id);
+const checkExistenceInLocal = (id, key) => {
+  const getLocal = getLocalStorage(key) || [];
+  return getLocal.find((localObj) => localObj.id === id);
+};
+
+const checkInProgress = (actualId, type) => {
+  const localProgressExist = getLocalStorage('inProgressRecipes');
+  if (localProgressExist) {
+    return Object.keys(localProgressExist[type]).find(
+      (idInLocal) => idInLocal === actualId,
+    );
+  }
+  return false;
 };
 
 const updateFavorite = (
@@ -30,7 +40,7 @@ const updateFavorite = (
   category,
   alcoholicOrNot,
   title,
-  image,
+  image
 ) => {
   const newFavorite = {
     id,
@@ -53,5 +63,6 @@ export {
   getLocalStorage,
   updateLocalStorage,
   updateFavorite,
-  checkFavorite,
+  checkExistenceInLocal,
+  checkInProgress,
 };
