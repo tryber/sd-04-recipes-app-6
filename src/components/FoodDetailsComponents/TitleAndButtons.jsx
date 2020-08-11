@@ -11,6 +11,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   removeItem,
+  checkFavorite,
 } from '../../services/localStorage';
 
 const TitleAndButtons = ({
@@ -40,11 +41,6 @@ const TitleAndButtons = ({
       return setLocalStorage('favoriteRecipes', removeItem(getFavorites, id));
     }
     return setLocalStorage('favoriteRecipes', [...getFavorites, newFavorite]);
-  };
-
-  const checkFavorite = () => {
-    const getFavorites = getLocalStorage('favoriteRecipes') || [];
-    return getFavorites.find((favoriteObj) => favoriteObj.id === id);
   };
 
   return (

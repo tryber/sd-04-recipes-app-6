@@ -18,4 +18,15 @@ const updateLocalStorage = (type, recipeId, ingArray) => {
 
 const removeItem = (items, id) => items.filter((item) => item.id !== id);
 
-export { setLocalStorage, getLocalStorage, updateLocalStorage, removeItem };
+const checkFavorite = (id) => {
+  const getFavorites = getLocalStorage('favoriteRecipes') || [];
+  return getFavorites.find((favoriteObj) => favoriteObj.id === id);
+};
+
+export {
+  setLocalStorage,
+  getLocalStorage,
+  updateLocalStorage,
+  removeItem,
+  checkFavorite,
+};
