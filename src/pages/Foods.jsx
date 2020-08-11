@@ -26,7 +26,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
     }
     if (dataFoods === null) {
       return alert(
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.'
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
     return console.log('CC -> olhar isso depois');
@@ -45,7 +45,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
               urlCategory="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
               isPageFood
             />
-            <div className='list'>
+            <div className="list">
               {recipesPagination(dataFoods, startPage, endPage).map(
                 (food, index) => (
                   <div className="cardBorder">
@@ -58,7 +58,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
                       testCard={`${index}-recipe-card`}
                     />
                   </div>
-                )
+                ),
               )}
             </div>
             <button
