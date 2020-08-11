@@ -7,12 +7,7 @@ import FavoriteWhite from '../../images/whiteHeartIcon.svg';
 import FavoriteBlack from '../../images/blackHeartIcon.svg';
 import ShareButton from '../../images/shareIcon.svg';
 import Button from '../Button';
-import {
-  getLocalStorage,
-  setLocalStorage,
-  removeItem,
-  checkFavorite,
-} from '../../services/localStorage';
+import { updateFavorite, checkFavorite } from '../../services/localStorage';
 
 const TitleAndButtons = ({
   alcoholicOrNot = '',
@@ -25,23 +20,6 @@ const TitleAndButtons = ({
 }) => {
   const { pathname } = useLocation();
   const [copy, setCopy] = useState(false);
-
-  const updateFavorite = () => {
-    const newFavorite = {
-      id,
-      type,
-      area,
-      category,
-      alcoholicOrNot,
-      name: title,
-      image,
-    };
-    const getFavorites = getLocalStorage('favoriteRecipes') || [];
-    if (getFavorites.find((favoriteObj) => favoriteObj.id === id)) {
-      return setLocalStorage('favoriteRecipes', removeItem(getFavorites, id));
-    }
-    return setLocalStorage('favoriteRecipes', [...getFavorites, newFavorite]);
-  };
 
   return (
     <div>
@@ -68,7 +46,19 @@ const TitleAndButtons = ({
               alt="share-icon-button"
             />
           </Button>
-          <Button onClick={() => updateFavorite()}>
+          <Button
+            onClick={() =>
+              updateFavorite(
+                id,
+                type,
+                area,
+                category,
+                alcoholicOrNot,
+                title,
+                image,
+              )
+            }
+          >
             <Image
               width={`${35}%`}
               test="favorite-btn"

@@ -23,10 +23,35 @@ const checkFavorite = (id) => {
   return getFavorites.find((favoriteObj) => favoriteObj.id === id);
 };
 
+const updateFavorite = (
+  id,
+  type,
+  area,
+  category,
+  alcoholicOrNot,
+  title,
+  image,
+) => {
+  const newFavorite = {
+    id,
+    type,
+    area,
+    category,
+    alcoholicOrNot,
+    name: title,
+    image,
+  };
+  const getFavorites = getLocalStorage('favoriteRecipes') || [];
+  if (getFavorites.find((favoriteObj) => favoriteObj.id === id)) {
+    return setLocalStorage('favoriteRecipes', removeItem(getFavorites, id));
+  }
+  return setLocalStorage('favoriteRecipes', [...getFavorites, newFavorite]);
+};
+
 export {
   setLocalStorage,
   getLocalStorage,
   updateLocalStorage,
-  removeItem,
+  updateFavorite,
   checkFavorite,
 };
