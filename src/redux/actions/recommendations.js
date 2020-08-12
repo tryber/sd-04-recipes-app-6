@@ -24,6 +24,6 @@ export const getRecommendations = (URL) => (dispatch) => {
   dispatch(requestRecommendations());
   return getRecipesAPI(URL).then(
     (data) => dispatch(requestRecommendationsSuccess(data)),
-    (error) => dispatch(requestRecommendationsFailure(error))
+    (error) => dispatch(requestRecommendationsFailure(error)),
   );
 };

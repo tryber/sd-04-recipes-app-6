@@ -1,16 +1,56 @@
 header {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin-bottom: 15px;
+  min-height: 10vh;
+}
+
+h2 {
+  margin: 0;
 }
 
 nav {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5px;
+}
+
+button {
+  margin: 0;
+  width: 80px;
+}
+
+input {
+  height: 10px;
+}
+
+label {
+  font-size: 10px;
+}
+
+.input-and-radio {
+  display: flex;
   flex-direction: column;
+}
+
+.input-radio-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.title button {
+  background: none;
+  border: none;
+  width: 42px;
 }
 
 .title {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 

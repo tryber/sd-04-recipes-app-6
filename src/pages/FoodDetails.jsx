@@ -1,30 +1,47 @@
 import React, { useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getFoodDetails } from '../redux/actions/foodDetails';
+import { getDetails } from '../redux/actions/foodOrDrinkDetails';
+import { addInProgressFood } from '../redux/actions/recipesProgress';
+import DrinkRecommendations from '../components/FoodDetailsComponents/DrinkRecommendations';
+import Instructions from '../components/FoodDetailsComponents/Instructions';
+import Ingredients from '../components/FoodDetailsComponents/Ingredients';
+import VideoFrame from '../components/FoodDetailsComponents/VideoFrame';
+import Button from '../components/Button';
 import Image from '../components/Image';
-import replaceStringsYouTube from '../services/replaceStringsYouTube';
-import DrinkRecommendations from '../components/DrinkRecommendations';
+import '../styles/FoodDetails.css';
+import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
+import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
 
-const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
-  // const { id } = useParams();
-  const id = 52882;
+const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
+  const history = useHistory();
+  const { id } = useParams();
   useEffect(() => {
-    getFoodDetailsProps(
+    getFoodDetailsAPI(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
     );
   }, []);
-  const getNumberOfIngredients = () => {
+  const getIngredients = () => {
     const ingredientsNumber = Object.keys(foodInfo).filter((key) =>
       key.includes('strIngredient'),
     );
-
-    return ingredientsNumber;
+    const ingredientsKeys = ingredientsNumber.filter(
+      (ingredientKey) => foodInfo[ingredientKey] !== '',
+    );
+    return ingredientsKeys;
   };
+
+  const getIngredientsArray = () =>
+    getIngredients().map((key) => foodInfo[key]);
+
+  const isDone =
+    getLocalStorage('doneRecipes') ||
+    [].find((recipe) => recipe.id === foodInfo.idMeal);
+
   return (
     <div>
-      {Object.keys(foodInfo).length > 0 && (
+      {foodInfo && (
         <div className="details-container">
           <Image
             width={`${100}%`}
@@ -32,39 +49,42 @@ const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
             src={foodInfo.strMealThumb}
             alt={foodInfo.strMeal}
           />
-          <h3 data-testid="recipe-title" className="details-name">
-            {foodInfo.strMeal}
-          </h3>
-          <h4 data-testid="recipe-category">{foodInfo.strCategory}</h4>
-
-          {getNumberOfIngredients().map((ingredientKey, index) => {
-            if (foodInfo[ingredientKey] !== '') {
-              return (
-                <p
-                  data-testid={`${index}-ingredient-name-and-measure`}
-                  key={
-                    foodInfo[ingredientKey] + foodInfo[`strMeasure${index + 1}`]
-                  }
-                >
-                  {foodInfo[ingredientKey]}-{foodInfo[`strMeasure${index + 1}`]}
-                </p>
-              );
-            }
-            return null;
-          })}
-          <p data-testid="instructions">{foodInfo.strInstructions}</p>
-          <h4>Vídeo</h4>
-          <iframe
+          <TitleAndButtons
+            area={foodInfo.strArea}
+            category={foodInfo.strCategory}
+            id={foodInfo.idMeal}
+            image={foodInfo.strMealThumb}
             title={foodInfo.strMeal}
-            data-testid="video"
-            width="300"
-            height="315"
-            src={replaceStringsYouTube(foodInfo.strYoutube)}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            type="comida"
+          />
+          <Ingredients
+            ingredients={getIngredients()}
+            foodOrDrinkData={foodInfo}
+          />
+          <Instructions instructions={foodInfo.strInstructions} />
+          <VideoFrame
+            videoTitle={foodInfo.strMeal}
+            videoURL={foodInfo.strYoutube}
           />
           <DrinkRecommendations />
+        </div>
+      )}
+      {!isDone && (
+        <div className="button-container">
+          <Button
+            onClick={() => {
+              addToInProgress(foodInfo.idMeal, getIngredientsArray());
+              history.push(`/comidas/${foodInfo.idMeal}/in-progress`);
+              updateLocalStorage(
+                'meals',
+                foodInfo.idMeal,
+                getIngredientsArray(),
+              );
+            }}
+            test="start-recipe-btn"
+          >
+            {checkInProgress(id, 'meals') ? 'Continuar Receita' : 'Iniciar Receita'}
+          </Button>
         </div>
       )}
     </div>
@@ -72,16 +92,18 @@ const FoodDetails = ({ getFoodDetailsProps, foodInfo }) => {
 };
 
 const mapState = (state) => ({
-  foodInfo: state.foodDetails.foodInfo,
+  foodInfo: state.foodOrDrinkDetails.details.meals[0],
 });
 
 const mapDispatch = {
-  getFoodDetailsProps: getFoodDetails,
+  getFoodDetailsAPI: getDetails,
+  addToInProgress: addInProgressFood,
 };
 
 export default connect(mapState, mapDispatch)(FoodDetails);
 
 FoodDetails.propTypes = {
-  getFoodDetailsProps: PropTypes.func.isRequired,
+  getFoodDetailsAPI: PropTypes.func.isRequired,
+  addToInProgress: PropTypes.func.isRequired,
   foodInfo: PropTypes.objectOf(PropTypes.string).isRequired,
 };

@@ -13,7 +13,7 @@ describe('Testes no login', () => {
     const { getByTestId } = renderWithRedux(renderWithRouter(<Login />));
     const inputEmail = getByTestId('email-input');
     const inputSenha = getByTestId('password-input');
-    const btnLogin = getByTestId('login-submit-button');
+    const btnLogin = getByTestId('login-submit-btn');
     expect(btnLogin).toBeDisabled();
     fireEvent.change(inputEmail, { target: { value: 'julianafatsil@gmail.com' } });
     expect(btnLogin).toBeDisabled();

@@ -3,35 +3,30 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
-import Header from './components/Header';
 import FoodDetails from './pages/FoodDetails';
-
-// import {
-//   Login,
-//   Foods,
-//   Drinks,
-//   FoodsDetail,
-//   DrinkDetail,
-//   FoodsProcess,
-//   DrinkProcess,
-//   Explore,
-//   ExploreFood,
-//   ExploreDrink,
-//   FoodIngredients,
-//   DrinkIngredients,
-//   FoodArea,
-//   Profile,
-//   CookedRecipes,
-//   FavoriteRecipes,
-// } from './pages';
+import Drinks from './pages/Drinks';
+import Foods from './pages/Foods';
+import FoodsInProgress from './pages/FoodsInProgress';
+import DrinksInProgress from './pages/DrinksInProgress';
+import DrinkDetails from './pages/DrinkDetails';
+import Explore from './pages/Explore'
+import ExploreFood from './pages/ExploreFood'
+import ExploreDrink from './pages/ExploreDrink'
 
 function App() {
   return (
     <React.Fragment>
-      <Header />
       <Switch>
+        <Route path="/comidas/:id/in-progress" component={FoodsInProgress} />
+        <Route path="/bebidas/:id/in-progress" component={DrinksInProgress} />
         <Route path="/comidas/:id" component={FoodDetails} />
+        <Route path="/bebidas/:id" component={DrinkDetails} />
+        <Route path="/comidas" component={Foods} />
+        <Route path="/bebidas" component={Drinks} />
         <Route exact path="/" component={Login} />
+        <Route path="/explorar" component={Explore} />
+        <Route path="/explorar/comidas" component={ExploreFood} />
+        <Route path="/explorar/bebidas" component={ExploreDrink} />
       </Switch>
     </React.Fragment>
   );
