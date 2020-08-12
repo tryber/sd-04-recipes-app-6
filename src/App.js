@@ -10,8 +10,6 @@ import FoodsInProgress from './pages/FoodsInProgress';
 import DrinksInProgress from './pages/DrinksInProgress';
 import DrinkDetails from './pages/DrinkDetails';
 import Explore from './pages/Explore'
-import ExploreFood from './pages/ExploreFood'
-import ExploreDrink from './pages/ExploreDrink'
 
 function App() {
   return (
@@ -25,8 +23,6 @@ function App() {
         <Route path="/bebidas" component={Drinks} />
         <Route exact path="/" component={Login} />
         <Route path="/explorar" component={Explore} />
-        <Route path="/explorar/comidas" component={ExploreFood} />
-        <Route path="/explorar/bebidas" component={ExploreDrink} />
       </Switch>
     </React.Fragment>
   );

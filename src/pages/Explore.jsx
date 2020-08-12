@@ -1,23 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import Button from '../components/Button';
 import Footer from '../components/Footer';
 
-function Explore() {
-  return (
-    <div className="explore-container">
-      <Header />
-      <section className="explore-links-container">
-        <Button test="explore-food" >
-          Explorar Comidas
-        </Button>
-        <Button test="explore-drinks" >
-          Explorar Bebidas
-        </Button>
-      </section>
-      <Footer />
+const Explore = () => (
+  <div>
+    <Header title="Explorar" />
+    <div className="explore">
+      <Link data-testid="explore-food" to="explorar/comidas">
+        <button className="btn explore-btn" type="button">Explorar Comidas</button>
+      </Link>
+      <Link data-testid="explore-drinks" to="explorar/bebidas">
+        <button className="btn explore-btn" type="button">Explorar Bebidas</button>
+      </Link>
     </div>
-  );
-}
+    <Footer />
+  </div>
+);
 
 export default Explore;
