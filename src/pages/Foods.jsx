@@ -21,7 +21,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
 
   const history = useHistory();
   useEffect(() => {
-    if (dataFoods && dataFoods.length === 1 && dataFoods[0].idMeal != 52968) {
+    if (dataFoods && dataFoods.length === 1 && dataFoods[0].idMeal !== 52968) {
       return history.push(`/comidas/${dataFoods[0].idMeal}`);
     }
     if (dataFoods === null) {
