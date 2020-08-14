@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -13,7 +14,7 @@ import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons
 import { getDetails } from '../redux/actions/foodOrDrinkDetails';
 import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
 
-const FoodDetails = ({ getDrinkDetailsAPI, drinkInfo, addToInProgress }) => {
+const FoodDetails = ({ getDrinkDetailsAPI, drinkDetails, addToInProgress }) => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
@@ -22,45 +23,44 @@ const FoodDetails = ({ getDrinkDetailsAPI, drinkInfo, addToInProgress }) => {
     );
   }, []);
   const getIngredients = () => {
-    const ingredientsNumber = Object.keys(drinkInfo).filter((key) =>
+    const ingredientsNumber = Object.keys(drinkDetails).filter((key) =>
       key.includes('strIngredient'),
     );
-    const ingredientsKeys = ingredientsNumber.filter(
-      (ingredientKey) => drinkInfo[ingredientKey] !== null,
-    );
+    const ingredientsKeys = ingredientsNumber.filter((ingKey) => drinkDetails[ingKey] !== null)
+      .filter((ingredientKey) => drinkDetails[ingredientKey] !== '');
     return ingredientsKeys;
   };
 
   const getIngredientsArray = () =>
-    getIngredients().map((key) => drinkInfo[key]);
+    getIngredients().map((key) => drinkDetails[key]);
 
   const isDone =
     getLocalStorage('doneRecipes') ||
-    [].find((recipe) => recipe.id === drinkInfo.idDrink);
+    [].find((recipe) => recipe.id === drinkDetails.idDrink);
 
   return (
     <div>
-      {drinkInfo && (
+      {drinkDetails && (
         <div className="details-container">
           <Image
             width={`${100}%`}
             test="recipe-photo"
-            src={drinkInfo.strDrinkThumb}
-            alt={drinkInfo.strDrink}
+            src={drinkDetails.strDrinkThumb}
+            alt={drinkDetails.strDrink}
           />
           <TitleAndButtons
-            alcoholicOrNot={drinkInfo.strAlcoholic}
-            category={drinkInfo.strCategory}
-            id={drinkInfo.idDrink}
-            image={drinkInfo.strDrinkThumb}
-            title={drinkInfo.strDrink}
+            alcoholicOrNot={drinkDetails.strAlcoholic}
+            category={drinkDetails.strCategory}
+            id={drinkDetails.idDrink}
+            image={drinkDetails.strDrinkThumb}
+            title={drinkDetails.strDrink}
             type="bebida"
           />
           <Ingredients
             ingredients={getIngredients()}
-            foodOrDrinkData={drinkInfo}
+            foodOrDrinkData={drinkDetails}
           />
-          <Instructions instructions={drinkInfo.strInstructions} />
+          <Instructions instructions={drinkDetails.strInstructions} />
           <FoodRecommendations />
         </div>
       )}
@@ -68,9 +68,9 @@ const FoodDetails = ({ getDrinkDetailsAPI, drinkInfo, addToInProgress }) => {
         <div className="button-container">
           <Button
             onClick={() => {
-              addToInProgress(drinkInfo.idDrink, getIngredientsArray());
-              history.push(`/bebidas/${drinkInfo.idDrink}/in-progress`);
-              updateLocalStorage('cocktails', drinkInfo.idDrink, getIngredientsArray());
+              addToInProgress(drinkDetails.idDrink, getIngredientsArray());
+              history.push(`/bebidas/${drinkDetails.idDrink}/in-progress`);
+              updateLocalStorage('cocktails', drinkDetails.idDrink, getIngredientsArray());
             }}
             test="start-recipe-btn"
           >
@@ -83,7 +83,7 @@ const FoodDetails = ({ getDrinkDetailsAPI, drinkInfo, addToInProgress }) => {
 };
 
 const mapState = (state) => ({
-  drinkInfo: state.foodOrDrinkDetails.details.drinks[0],
+  drinkDetails: state.foodOrDrinkDetails.details.drinks[0],
 });
 
 const mapDispatch = {
@@ -96,5 +96,5 @@ export default connect(mapState, mapDispatch)(FoodDetails);
 FoodDetails.propTypes = {
   getDrinkDetailsAPI: PropTypes.func.isRequired,
   addToInProgress: PropTypes.func.isRequired,
-  drinkInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+  drinkDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };

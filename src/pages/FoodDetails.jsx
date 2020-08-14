@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,7 +15,7 @@ import '../styles/FoodDetails.css';
 import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
 import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
 
-const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
+const FoodDetails = ({ getFoodDetailsAPI, foodDetails, addToInProgress }) => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
@@ -23,48 +24,47 @@ const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
     );
   }, []);
   const getIngredients = () => {
-    const ingredientsNumber = Object.keys(foodInfo).filter((key) =>
+    const ingredientsNumber = Object.keys(foodDetails).filter((key) =>
       key.includes('strIngredient'),
     );
-    const ingredientsKeys = ingredientsNumber.filter(
-      (ingredientKey) => foodInfo[ingredientKey] !== '',
-    );
+    const ingredientsKeys = ingredientsNumber.filter((ingKey) => foodDetails[ingKey] !== '')
+      .filter((ingredientKey) => foodDetails[ingredientKey] !== null);
     return ingredientsKeys;
   };
 
   const getIngredientsArray = () =>
-    getIngredients().map((key) => foodInfo[key]);
+    getIngredients().map((key) => foodDetails[key]);
 
   const isDone =
     getLocalStorage('doneRecipes') ||
-    [].find((recipe) => recipe.id === foodInfo.idMeal);
+    [].find((recipe) => recipe.id === foodDetails.idMeal);
 
   return (
     <div>
-      {foodInfo && (
+      {foodDetails && (
         <div className="details-container">
           <Image
             width={`${100}%`}
             test="recipe-photo"
-            src={foodInfo.strMealThumb}
-            alt={foodInfo.strMeal}
+            src={foodDetails.strMealThumb}
+            alt={foodDetails.strMeal}
           />
           <TitleAndButtons
-            area={foodInfo.strArea}
-            category={foodInfo.strCategory}
-            id={foodInfo.idMeal}
-            image={foodInfo.strMealThumb}
-            title={foodInfo.strMeal}
+            area={foodDetails.strArea}
+            category={foodDetails.strCategory}
+            id={foodDetails.idMeal}
+            image={foodDetails.strMealThumb}
+            title={foodDetails.strMeal}
             type="comida"
           />
           <Ingredients
             ingredients={getIngredients()}
-            foodOrDrinkData={foodInfo}
+            foodOrDrinkData={foodDetails}
           />
-          <Instructions instructions={foodInfo.strInstructions} />
+          <Instructions instructions={foodDetails.strInstructions} />
           <VideoFrame
-            videoTitle={foodInfo.strMeal}
-            videoURL={foodInfo.strYoutube}
+            videoTitle={foodDetails.strMeal}
+            videoURL={foodDetails.strYoutube}
           />
           <DrinkRecommendations />
         </div>
@@ -73,11 +73,11 @@ const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
         <div className="button-container">
           <Button
             onClick={() => {
-              addToInProgress(foodInfo.idMeal, getIngredientsArray());
-              history.push(`/comidas/${foodInfo.idMeal}/in-progress`);
+              addToInProgress(foodDetails.idMeal, getIngredientsArray());
+              history.push(`/comidas/${foodDetails.idMeal}/in-progress`);
               updateLocalStorage(
                 'meals',
-                foodInfo.idMeal,
+                foodDetails.idMeal,
                 getIngredientsArray(),
               );
             }}
@@ -92,7 +92,7 @@ const FoodDetails = ({ getFoodDetailsAPI, foodInfo, addToInProgress }) => {
 };
 
 const mapState = (state) => ({
-  foodInfo: state.foodOrDrinkDetails.details.meals[0],
+  foodDetails: state.foodOrDrinkDetails.details.meals[0],
 });
 
 const mapDispatch = {
@@ -105,5 +105,5 @@ export default connect(mapState, mapDispatch)(FoodDetails);
 FoodDetails.propTypes = {
   getFoodDetailsAPI: PropTypes.func.isRequired,
   addToInProgress: PropTypes.func.isRequired,
-  foodInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+  foodDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };

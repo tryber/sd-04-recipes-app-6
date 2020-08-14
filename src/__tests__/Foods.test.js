@@ -1,5 +1,5 @@
 import React from 'react';
-import cleanup, { wait, waitForDomChange, getByText } from '@testing-library/react';
+import cleanup, { wait, getByText, waitFor } from '@testing-library/react';
 import renderWithRouter from '../Helper/renderWithRouter';
 import renderWithRedux from '../Helper/renderWithRedux';
 import Foods from '../pages/Foods';
@@ -18,7 +18,7 @@ getRecipesApi.mockImplementationOnce(() => Promise.resolve(foodCategoriesMock));
 describe('Testes na tela principal', () => {
   it('Verificando se tem os 12 cards na tela de comidas', async () => {
     const { getByTestId } = renderWithRedux(renderWithRouter(<Foods />));
-    await waitForDomChange(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
     [
       'Corba',
       'Kumpir',

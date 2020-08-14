@@ -1,5 +1,5 @@
 import React from 'react';
-import { waitForDomChange } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import renderWithRouter from '../Helper/renderWithRouter';
 import renderWithRedux from '../Helper/renderWithRedux';
@@ -28,34 +28,36 @@ getRecipesApi
 describe('testes na página FoodDetails', () => {
   it('se as informações detalhadas aparecem corretamente', async () => {
     const { getByText, getByTestId } = renderWithRedux(
-      renderWithRouter(<FoodDetails />),
+      renderWithRouter(<FoodDetails />)
     );
-    await waitForDomChange(() =>
-      expect(getRecipesApi).toHaveBeenCalledTimes(2),
-    );
+    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(1));
     expect(getByText('Kumpir')).toBeInTheDocument();
     expect(getByText('Side')).toBeInTheDocument();
     [
-      'Potatoes-2 large',
-      'Butter-2 tbs',
-      'Cheese-150g',
-      'Onion-1 large',
-      'Red Pepper-1 large',
-      'Red Chile Flakes-Pinch',
+      'Potatoes - 2 large',
+      'Butter - 2 tbs',
+      'Cheese - 150g',
+      'Onion - 1 large',
+      'Red Pepper - 1 large',
+      'Red Chile Flakes - Pinch',
     ].forEach((ingredientAndMesure, index) =>
       expect(
-        getByTestId(`${index}-ingredient-name-and-measure`),
-      ).toHaveTextContent(ingredientAndMesure),
+        getByTestId(`${index}-ingredient-name-and-measure`)
+      ).toHaveTextContent(ingredientAndMesure)
     );
     expect(getByTestId('instructions')).toHaveTextContent(
-      foodDetailsMock.meals[0].strInstructions,
+      foodDetailsMock.meals[0].strInstructions
     );
     expect(getByTestId('video')).toHaveAttribute(
       'src',
-      replaceStringsYouTube(foodDetailsMock.meals[0].strYoutube),
+      replaceStringsYouTube(foodDetailsMock.meals[0].strYoutube)
     );
+    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
     ['GG', 'A1', 'ABC', 'Kir', '747', '252'].forEach((drinkName, index) =>
-      expect(getByTestId(`${index}-recomendation-title`)).toHaveTextContent(drinkName));
-    expect(getByTestId('start-recipe-btn')).toHaveTextContent('Iniciar Receita')
+      expect(getByTestId(`${index}-recomendation-title`)).toHaveTextContent(
+        drinkName
+      )
+    );
+    expect(getByTestId('start-recipe-btn')).toHaveTextContent('Iniciar Receita');
   });
 });
