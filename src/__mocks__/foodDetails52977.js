@@ -1,5 +1,4 @@
 module.exports = {
-    details:{
   meals: [
     {
       idMeal: '52977',
@@ -58,5 +57,5 @@ module.exports = {
       dateModified: null,
     },
   ],
-},
+
 };
