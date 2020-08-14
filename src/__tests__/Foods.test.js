@@ -6,7 +6,7 @@ import App from '../App';
 import getRecipesApi from '../services/getRecipesApi';
 import foodRecipesMock from '../__mocks__/foodRecipesMock';
 import foodCategoriesMock from '../__mocks__/foodCategories.Mock';
-import foodDetails52977 from '../__mocks__/foodDetails52977';
+import foodDetailsMock from '../__mocks__/foodDetailsMock';
 import drinkRecommendationsMock from '../__mocks__/drinkRecommendationsMock';
 import categoryBeefMock from '../__mocks__/categoryBeefMock';
 
@@ -35,7 +35,7 @@ apiMockFoodsAndCategories();
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(categoryBeefMock));
 // Test 5
 apiMockFoodsAndCategories();
-getRecipesApi.mockImplementationOnce(() => Promise.resolve(foodDetails52977));
+getRecipesApi.mockImplementationOnce(() => Promise.resolve(foodDetailsMock));
 getRecipesApi.mockImplementationOnce(() =>
   Promise.resolve(drinkRecommendationsMock)
 );

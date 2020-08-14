@@ -37,7 +37,6 @@ function Drinks({ recipesDrinks, dataDrinks, isLoading }) {
   return (
     <div className="centralizar">
       <Header isSearchActive title="Bebidas" />
-      <h1>Tetsando test</h1>
       <div className="container">
         {isLoading && <h3>Carregando...</h3>}
         {dataDrinks && dataDrinks.length > 0 && (
