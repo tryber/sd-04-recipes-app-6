@@ -1,13 +1,15 @@
 import {
   ADD_IN_PROGRESS_FOOD,
   ADD_IN_PROGRESS_DRINK,
+  UPDATE_IN_PROGRESS,
+  ADD_DONE_FOOD_RECIPE,
+  ADD_DONE_DRINK_RECIPE,
 } from '../actions/recipesProgress';
-import { setLocalStorage } from '../../services/localStorage';
+import { getLocalStorage, setLocalStorage } from '../../services/localStorage';
 
 const INITIAL_STATE = {
-  inProgressFoodRecipes: [],
-  inProgressDrinkRecipes: [],
-  doneRecipes: [],
+  inProgressRecipes: getLocalStorage('inProgressRecipes') || [],
+  doneRecipes: getLocalStorage('doneRecipes') || [],
 };
 
 const recipesProgress = (state = INITIAL_STATE, action) => {
@@ -15,26 +17,75 @@ const recipesProgress = (state = INITIAL_STATE, action) => {
     case ADD_IN_PROGRESS_FOOD:
       return {
         ...state,
-        inProgressFoodRecipes: [
-          ...state.inProgressFoodRecipes,
-          { [action.id]: action.ingArray },
-        ],
+        inProgressRecipes: {
+          ...state.inProgressRecipes,
+          meals: {
+            ...state.inProgressRecipes.meals,
+            [action.id]: action.ingArray,
+          },
+        },
       };
     case ADD_IN_PROGRESS_DRINK:
-      setLocalStorage('inProgressRecipes', {
-        cocktails: {
-          ...state.inProgressDrinkRecipes,
-          [action.id]: action.ingArray,
-        },
-        meals: { ...state.inProgressFoodRecipes },
-      });
       return {
         ...state,
-        inProgressDrinkRecipes: [
-          ...state.inProgressDrinkRecipes,
-          { [action.id]: action.ingArray },
-        ],
+        inProgressRecipes: {
+          ...state.inProgressRecipes,
+          cocktails: {
+            ...state.inProgressRecipes.cocktails,
+            [action.id]: action.ingArray,
+          },
+        },
       };
+    case UPDATE_IN_PROGRESS:
+      if (
+        state.inProgressRecipes[action.kind][action.id].includes(
+          action.ingredient,
+        )
+      ) {
+        return {
+          ...state,
+          inProgressRecipes: {
+            ...state.inProgressRecipes,
+            [action.kind]: {
+              ...state.inProgressRecipes[action.kind],
+              [action.id]: state.inProgressRecipes[action.kind][
+                action.id
+              ].filter((stateIng) => stateIng !== action.ingredient),
+            },
+          },
+        };
+      }
+      return {
+        ...state,
+        inProgressRecipes: {
+          ...state.inProgressRecipes,
+          [action.kind]: {
+            ...state.inProgressRecipes[action.kind],
+            [action.id]: state.inProgressRecipes[action.kind][action.id].concat(
+              action.ingredient,
+            ),
+          },
+        },
+      };
+    case ADD_DONE_FOOD_RECIPE:
+      setLocalStorage('doneRecipes', [
+        ...INITIAL_STATE.doneRecipes,
+        action.doneRecipeObj,
+      ]);
+      return {
+        ...state,
+        doneRecipes: [...state.doneRecipes, action.doneRecipeObj],
+      };
+    case ADD_DONE_DRINK_RECIPE:
+      setLocalStorage('doneRecipes', [
+        ...INITIAL_STATE.doneRecipes,
+        action.doneRecipeObj,
+      ]);
+      return {
+        ...state,
+        doneRecipes: [...state.doneRecipes, action.doneRecipeObj],
+      };
+
     default:
       return state;
   }

@@ -12,9 +12,7 @@ const RecipesCard = ({
   testName,
 }) => (
   <Link to={to}>
-    <div
-      data-testid={testCard}
-    >
+    <div data-testid={testCard}>
       <Image to={to} src={srcImagem} alt={title} test={testImage} />
       <h1 data-testid={testName}>{title}</h1>
     </div>
