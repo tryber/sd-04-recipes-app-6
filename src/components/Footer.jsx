@@ -5,14 +5,14 @@ import drinkLogo from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 
-import '../App.css';
+import '../styles/Footer.css';
 
 const Footer = () => (
-  <div className="Footer">
+  <div className="Footer" data-testid="footer">
     <Image to="/bebidas" src={drinkLogo} alt={'bebidas'} test={'drinks-bottom-btn'} />
 
     <Image
-      to=""
+      to="/explorar"
       src={exploreIcon}
       alt={'explore'}
       test={'explore-bottom-btn'}

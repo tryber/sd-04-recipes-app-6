@@ -11,6 +11,7 @@ import recipesPagination from '../services/recipesPagination';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import '../styles/Foods.css';
+import '../styles/TelaPrincipal.css';
 
 function Drinks({ recipesDrinks, dataDrinks, isLoading }) {
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -35,7 +36,7 @@ function Drinks({ recipesDrinks, dataDrinks, isLoading }) {
   }, [dataDrinks]);
 
   return (
-    <div>
+    <div className="centralizar">
       <Header isSearchActive title="Bebidas" />
       <div className="container">
         {isLoading && <h3>Carregando...</h3>}
@@ -47,19 +48,23 @@ function Drinks({ recipesDrinks, dataDrinks, isLoading }) {
               urlCategory="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
               isPageFood={false}
             />
-            {recipesPagination(dataDrinks, startPage, endPage).map(
-              (drink, index) => (
-                <RecipesCard
-                  key={drink.strDrink}
-                  title={drink.strDrink}
-                  srcImagem={drink.strDrinkThumb}
-                  to={`/bebidas/${drink.idDrink}`}
-                  testImage={`${index}-card-img`}
-                  testName={`${index}-card-name`}
-                  testCard={`${index}-recipe-card`}
-                />
-              ),
-            )}
+            <div className="list">
+              {recipesPagination(dataDrinks, startPage, endPage).map(
+                (drink, index) => (
+                  <div className="cardBorder">
+                    <RecipesCard
+                      key={drink.strDrink}
+                      title={drink.strDrink}
+                      srcImagem={drink.strDrinkThumb}
+                      to={`/bebidas/${drink.idDrink}`}
+                      testImage={`${index}-card-img`}
+                      testName={`${index}-card-name`}
+                      testCard={`${index}-recipe-card`}
+                    />
+                  </div>
+                ),
+              )}
+            </div>
             <Button
               onClick={() => {
                 setStartPage(startPage + 12);
