@@ -6,9 +6,9 @@ import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import RecipesCard from '../components/RecipesCard';
 import recipesPagination from '../services/recipesPagination';
 import Categories from '../components/Category';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
-import '../styles/Foods.css';
+import Footer from '../components/Footer';
+import '../styles/TelaPrincipal.css';
 
 function Foods({ recipesFoods, dataFoods, isLoading }) {
   const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -21,7 +21,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
 
   const history = useHistory();
   useEffect(() => {
-    if (dataFoods && dataFoods.length === 1 && dataFoods[0].idMeal != 52968) {
+    if (dataFoods && dataFoods.length === 1 && Number(dataFoods[0].idMeal) !== 52968) {
       return history.push(`/comidas/${dataFoods[0].idMeal}`);
     }
     if (dataFoods === null) {
@@ -33,7 +33,7 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
   }, [dataFoods]);
 
   return (
-    <div>
+    <div className="centralizar">
       <Header isSearchActive title="Comidas" />
       <div className="container">
         {isLoading && <h3>Carregando...</h3>}
@@ -45,18 +45,22 @@ function Foods({ recipesFoods, dataFoods, isLoading }) {
               urlCategory="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
               isPageFood
             />
-            {recipesPagination(dataFoods, startPage, endPage).map(
-              (food, index) => (
-                <RecipesCard
-                  title={food.strMeal}
-                  srcImagem={food.strMealThumb}
-                  to={`/comidas/${food.idMeal}`}
-                  testImage={`${index}-card-img`}
-                  testName={`${index}-card-name`}
-                  testCard={`${index}-recipe-card`}
-                />
-              ),
-            )}
+            <div className="list">
+              {recipesPagination(dataFoods, startPage, endPage).map(
+                (food, index) => (
+                  <div className="cardBorder">
+                    <RecipesCard
+                      title={food.strMeal}
+                      srcImagem={food.strMealThumb}
+                      to={`/comidas/${food.idMeal}`}
+                      testImage={`${index}-card-img`}
+                      testName={`${index}-card-name`}
+                      testCard={`${index}-recipe-card`}
+                    />
+                  </div>
+                ),
+              )}
+            </div>
             <button
               type="button"
               onClick={() => {
