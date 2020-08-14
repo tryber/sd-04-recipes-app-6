@@ -5,6 +5,7 @@ import { getCategory } from '../redux/actions/category';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import recipesPagination from '../services/recipesPagination';
 import Button from './Button';
+import '../styles/TelaPrincipal.css';
 
 function newCategory(innerText, filterCategory) {
   const category =
@@ -55,6 +56,7 @@ const Categories = ({
       {listCategories &&
         recipesPagination(listCategories, 0, 5).map((el) => (
           <Button
+            className={'button'}
             test={`${el.strCategory}-category-filter`}
             onClick={(event) => {
               changeCategories(event);
@@ -65,6 +67,7 @@ const Categories = ({
           </Button>
         ))}
       <Button
+        className={'button'}
         test="All-category-filter"
         onClick={(event) => {
           changeCategories(event);
