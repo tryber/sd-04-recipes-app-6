@@ -4,15 +4,16 @@ import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addInProgressDrink } from '../redux/actions/recipesProgress';
-import FoodRecommendations from '../components/FoodDetailsComponents/FoodRecommendations';
-import Instructions from '../components/FoodDetailsComponents/Instructions';
-import Ingredients from '../components/FoodDetailsComponents/Ingredients';
+import FoodRecommendations from '../components/FoodOrDrinkDetailsComponents/FoodRecommendations';
+import Instructions from '../components/FoodOrDrinkDetailsComponents/Instructions';
+import Ingredients from '../components/FoodOrDrinkDetailsComponents/Ingredients';
 import Button from '../components/Button';
 import Image from '../components/Image';
 import '../styles/FoodDetails.css';
-import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
+import TitleAndButtons from '../components/FoodOrDrinkDetailsComponents/TitleAndButtons';
 import { getDetails } from '../redux/actions/foodOrDrinkDetails';
 import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
+import getIngredients from '../services/getIngredients';
 
 const FoodDetails = ({ getDrinkDetailsAPI, drinkDetails, addToInProgress }) => {
   const history = useHistory();
@@ -22,17 +23,9 @@ const FoodDetails = ({ getDrinkDetailsAPI, drinkDetails, addToInProgress }) => {
       `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
     );
   }, []);
-  const getIngredients = () => {
-    const ingredientsNumber = Object.keys(drinkDetails).filter((key) =>
-      key.includes('strIngredient'),
-    );
-    const ingredientsKeys = ingredientsNumber.filter((ingKey) => drinkDetails[ingKey] !== null)
-      .filter((ingredientKey) => drinkDetails[ingredientKey] !== '');
-    return ingredientsKeys;
-  };
 
   const getIngredientsArray = () =>
-    getIngredients().map((key) => drinkDetails[key]);
+    getIngredients(drinkDetails).map((key) => drinkDetails[key]);
 
   const isDone =
     getLocalStorage('doneRecipes') ||
@@ -57,7 +50,7 @@ const FoodDetails = ({ getDrinkDetailsAPI, drinkDetails, addToInProgress }) => {
             type="bebida"
           />
           <Ingredients
-            ingredients={getIngredients()}
+            ingredients={getIngredients(drinkDetails)}
             foodOrDrinkData={drinkDetails}
           />
           <Instructions instructions={drinkDetails.strInstructions} />

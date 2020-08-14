@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getDetails } from '../redux/actions/foodOrDrinkDetails';
 import { addDoneFoodRecipe, addInProgressFood } from '../redux/actions/recipesProgress';
-import Ingredients from '../components/FoodDetailsComponents/Ingredients';
+import Ingredients from '../components/FoodOrDrinkDetailsComponents/Ingredients';
 import Button from '../components/Button';
 import Image from '../components/Image';
 import '../styles/FoodDetails.css';
-import TitleAndButtons from '../components/FoodDetailsComponents/TitleAndButtons';
-import Instructions from '../components/FoodDetailsComponents/Instructions';
+import TitleAndButtons from '../components/FoodOrDrinkDetailsComponents/TitleAndButtons';
+import Instructions from '../components/FoodOrDrinkDetailsComponents/Instructions';
 import { updateLocalStorage, getLocalStorage } from '../services/localStorage';
+import getIngredients from '../services/getIngredients';
 
 const FoodsInProgress = ({
   getFoodDetailsAPI,
@@ -28,26 +29,34 @@ const FoodsInProgress = ({
     }
   }, []);
 
-  const getIngredients = () => {
-    const ingredientsNumber = Object.keys(foodDetails).filter((key) =>
-      key.includes('strIngredient'),
-    );
-    const ingredientsKeys = ingredientsNumber.filter((ingKey) => foodDetails[ingKey] !== '')
-      .filter((ingredientKey) => foodDetails[ingredientKey] !== null);
-    // tive que filtrar duas vezes pq essa API é ruim demais!!! Uma hora tem "" outra hora tem null
-    return ingredientsKeys;
-  };
   // adicionei esse useEffect pq o teste estava entrando nessa rota sem antes iniciar a receita
   // na rota anterior, então agora, ao montar o componente, a comida é adicionanda automaticamente
   // ao status de em progresso
   useEffect(() => {
     const getInProgress = getLocalStorage('inProgressRecipes');
     if (foodDetails && (!getInProgress || (getInProgress && !getInProgress.meals[id]))) {
-      const getIngredientsArray = () => getIngredients().map((key) => foodDetails[key]);
+      const getIngredientsArray = () => getIngredients(foodDetails).map((key) => foodDetails[key]);
       updateLocalStorage('meals', id, getIngredientsArray());
       addToInProgress(id, getIngredientsArray());
     }
   }, [foodDetails]);
+
+  const getDoneObj = () => {
+    if (foodDetails) {
+      return {
+        id: foodDetails.idMeal,
+        type: 'comida',
+        area: foodDetails.strArea,
+        category: foodDetails.strCategory,
+        alcoholicOrNot: '',
+        name: foodDetails.strMeal,
+        image: foodDetails.strMealThumb,
+        doneDate: new Date().toLocaleDateString(),
+        tags: foodDetails.strTags,
+      };
+    }
+    return true;
+  };
 
   return (
     <div>
@@ -71,7 +80,7 @@ const FoodsInProgress = ({
             type="meals"
             id="idMeal"
             checkbox
-            ingredients={getIngredients()}
+            ingredients={getIngredients(foodDetails)}
             foodOrDrinkData={foodDetails}
           />
           <Instructions instructions={foodDetails.strInstructions} />
@@ -80,7 +89,7 @@ const FoodsInProgress = ({
       <div className="button-container">
         <Button
           onClick={() => {
-            addToDone(foodDetails);
+            addToDone(getDoneObj());
             history.push('/receitas-feitas');
           }}
           disabled={inProgressRecipes.meals && inProgressRecipes.meals[id].length > 0}

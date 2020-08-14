@@ -43,19 +43,19 @@ const Ingredients = ({
                 updateIngredientsLocal(
                   foodOrDrinkData[id],
                   type,
-                  foodOrDrinkData[ingredientKey]
+                  foodOrDrinkData[ingredientKey],
                 );
                 updateFoodInProgress(
                   foodOrDrinkData[id],
                   type,
-                  foodOrDrinkData[ingredientKey]
+                  foodOrDrinkData[ingredientKey],
                 );
               }}
               defaultChecked={
                 !checkIngredientLocal(
                   foodOrDrinkData[id],
                   type,
-                  foodOrDrinkData[ingredientKey]
+                  foodOrDrinkData[ingredientKey],
                 )
               }
               type="checkbox"

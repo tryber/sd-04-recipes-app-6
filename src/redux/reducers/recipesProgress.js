@@ -2,12 +2,14 @@ import {
   ADD_IN_PROGRESS_FOOD,
   ADD_IN_PROGRESS_DRINK,
   UPDATE_IN_PROGRESS,
+  ADD_DONE_FOOD_RECIPE,
+  ADD_DONE_DRINK_RECIPE,
 } from '../actions/recipesProgress';
-import { setLocalStorage, getLocalStorage } from '../../services/localStorage';
+import { getLocalStorage, setLocalStorage } from '../../services/localStorage';
 
 const INITIAL_STATE = {
   inProgressRecipes: getLocalStorage('inProgressRecipes') || [],
-  doneRecipes: [],
+  doneRecipes: getLocalStorage('doneRecipes') || [],
 };
 
 const recipesProgress = (state = INITIAL_STATE, action) => {
@@ -37,7 +39,7 @@ const recipesProgress = (state = INITIAL_STATE, action) => {
     case UPDATE_IN_PROGRESS:
       if (
         state.inProgressRecipes[action.kind][action.id].includes(
-          action.ingredient
+          action.ingredient,
         )
       ) {
         return {
@@ -46,9 +48,9 @@ const recipesProgress = (state = INITIAL_STATE, action) => {
             ...state.inProgressRecipes,
             [action.kind]: {
               ...state.inProgressRecipes[action.kind],
-              [action.id]: state.inProgressRecipes[action.kind][action.id].filter(
-                (stateIng) => stateIng !== action.ingredient
-              ),
+              [action.id]: state.inProgressRecipes[action.kind][
+                action.id
+              ].filter((stateIng) => stateIng !== action.ingredient),
             },
           },
         };
@@ -60,10 +62,28 @@ const recipesProgress = (state = INITIAL_STATE, action) => {
           [action.kind]: {
             ...state.inProgressRecipes[action.kind],
             [action.id]: state.inProgressRecipes[action.kind][action.id].concat(
-              action.ingredient
+              action.ingredient,
             ),
           },
         },
+      };
+    case ADD_DONE_FOOD_RECIPE:
+      setLocalStorage('doneRecipes', [
+        ...INITIAL_STATE.doneRecipes,
+        action.doneRecipeObj,
+      ]);
+      return {
+        ...state,
+        doneRecipes: [...state.doneRecipes, action.doneRecipeObj],
+      };
+    case ADD_DONE_DRINK_RECIPE:
+      setLocalStorage('doneRecipes', [
+        ...INITIAL_STATE.doneRecipes,
+        action.doneRecipeObj,
+      ]);
+      return {
+        ...state,
+        doneRecipes: [...state.doneRecipes, action.doneRecipeObj],
       };
 
     default:
