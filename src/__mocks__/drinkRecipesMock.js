@@ -1324,7 +1324,6 @@ module.exports = {
       strMeasure15: null,
       strCreativeCommonsConfirmed: 'Yes',
       dateModified: '2016-09-01 10:05:34',
-<<<<<<< HEAD
     },
     {
       idDrink: '11149',
@@ -1440,8 +1439,6 @@ module.exports = {
       strMeasure15: null,
       strCreativeCommonsConfirmed: 'No',
       dateModified: '2017-09-08 16:55:14',
-=======
->>>>>>> a1b70836e7f26810e4f291acb97c13665a557967
     },
   ],
 };
