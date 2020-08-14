@@ -24,29 +24,28 @@ const apiMockFoodsAndCategories = () => {
   );
 };
 
-// // primeiro teste
+// Test 1
 apiMockFoodsAndCategories();
-// // seg teste
+// Test 2
 apiMockFoodsAndCategories();
-// //terce test
+// Test 3
 apiMockFoodsAndCategories();
-// // quarto test
+// Test 4
 apiMockFoodsAndCategories();
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(categoryBeefMock));
-// quinto test
+// Test 5
 apiMockFoodsAndCategories();
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(foodDetails52977));
 getRecipesApi.mockImplementationOnce(() =>
   Promise.resolve(drinkRecommendationsMock)
 );
-// sexto test
+// Test 6
 apiMockFoodsAndCategories();
-// sétimo test
+// Test 7
 apiMockFoodsAndCategories();
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(categoryBeefMock));
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(foodRecipesMock));
-
-// oitavo test
+// Test 8
 apiMockFoodsAndCategories();
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(categoryBeefMock));
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(foodRecipesMock));
