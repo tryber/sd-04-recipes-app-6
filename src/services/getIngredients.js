@@ -1,6 +1,6 @@
 const getIngredients = (drinkOrFoodDetails) => {
   const ingredientsNumber = Object.keys(drinkOrFoodDetails).filter((key) =>
-    key.includes('strIngredient')
+    key.includes('strIngredient'),
   );
   const ingredientsKeys = ingredientsNumber
     .filter((ingKey) => drinkOrFoodDetails[ingKey] !== null)

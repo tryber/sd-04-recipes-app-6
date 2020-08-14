@@ -29,7 +29,7 @@ const DrinksInProgress = ({
   useEffect(() => {
     if (!drinkDetails) {
       getDrinkDetailsAPI(
-        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
       );
     }
   }, []);
