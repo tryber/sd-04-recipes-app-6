@@ -32,7 +32,7 @@ apiMockDrinksAndCategories();
 apiMockDrinksAndCategories();
 // Test 4
 apiMockDrinksAndCategories();
-getRecipesApi.mockImplementationOnce(() => Promise.resolve(categoryBeefMock));
+getRecipesApi.mockImplementationOnce(() => Promise.resolve(categoryOrdinaryDrinksMock));
 // Test 5
 apiMockDrinksAndCategories();
 getRecipesApi.mockImplementationOnce(() => Promise.resolve(drinkDetailsMock));
@@ -74,7 +74,7 @@ describe('Testes na tela de Bebidas', () => {
     );
   });
 
-  it('Verificando se tem botão próximo, e se esta exibindo os 12 próximos cards', async () => {
+  it('Verificando se tem botão próximo, e se esta exibindo os 12 próximos cards ao clicar nele', async () => {
     const { getByTestId, getByText, queryAllByTestId } = renderWithRedux(
       renderWithRouter(<App />, ['/bebidas'])
     );
@@ -116,7 +116,7 @@ describe('Testes na tela de Bebidas', () => {
     const card = getByTestId('0-recipe-card');
     fireEvent.click(card);
     await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(4));
-    expect(getByText('3-Mile Long Island Iced Tea')).toBeInTheDocument();
+    expect(getByText('GG')).toBeInTheDocument();
   });
 
   it('Vericando se ao entrar na tela de Bebidas, aparece o header "Bebidas" ', async () => {

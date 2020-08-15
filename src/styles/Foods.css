@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: 80vh;
+  margin-bottom: 60px;
 }
 
 a {
