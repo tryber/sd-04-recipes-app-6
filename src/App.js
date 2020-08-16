@@ -9,6 +9,7 @@ import Foods from './pages/Foods';
 import FoodsInProgress from './pages/FoodsInProgress';
 import DrinksInProgress from './pages/DrinksInProgress';
 import DrinkDetails from './pages/DrinkDetails';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/bebidas/:id" component={DrinkDetails} />
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
+        <Route path="/receitas-favoritas" component={FavoriteRecipes} />
         <Route exact path="/" component={Login} />
       </Switch>
     </React.Fragment>
