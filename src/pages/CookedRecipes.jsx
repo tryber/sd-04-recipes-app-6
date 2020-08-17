@@ -42,7 +42,7 @@ const CookedRecipes = () => {
             test={`${index}-horizontal-share-btn`}
             onClick={() => {
               copyToClipboard(
-                `http://localhost:3000/${element.type}s/${element.id}`,
+                `http://localhost:3000/${element.type}s/${element.id}`
               );
               setCopy(!copy);
             }}
@@ -73,14 +73,9 @@ const CookedRecipes = () => {
             {element.doneDate}
           </p>
           <p>
-            {recipesPagination(element.tags, 0, 2).map((e) => 
-               (
-                <p data-testid={`${index}-${e}-horizontal-tag`}>
-                  {' '}
-                  {element}
-                </p>
-               )
-            )}
+            {recipesPagination(element.tags, 0, 2).map((e) => (
+              <p data-testid={`${index}-${e}-horizontal-tag`}> {element}</p>
+            ))}
           </p>
         </div>
       ))}
