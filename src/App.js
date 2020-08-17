@@ -9,7 +9,12 @@ import Foods from './pages/Foods';
 import FoodsInProgress from './pages/FoodsInProgress';
 import DrinksInProgress from './pages/DrinksInProgress';
 import DrinkDetails from './pages/DrinkDetails';
-import Explore from './pages/Explore'
+import Explore from './pages/Explore';
+import ExploreFood from './pages/ExploreFood';
+import ExploreDrink from './pages/ExploreDrink';
+import ExploreDrinkIngredients from './pages/ExploreDrinkIngredients';
+import ExploreFoodArea from './pages/ExploreFoodArea';
+
 
 function App() {
   return (
@@ -22,6 +27,11 @@ function App() {
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
         <Route exact path="/" component={Login} />
+        <Route path="/explorar/comidas" component={ExploreFood} />
+        <Route path="/explorar/bebidas" component={ExploreDrink} />
+        <Route path="/explorar/bebidas/ingredientes" component={ExploreDrinkIngredients} />
+        <Route path="/explorar/comidas/ingredientes" component={ExploreFoodIngredients} />
+        <Route path="/explorar/comidas/area" component={ExploreFoodArea} />
         <Route path="/explorar" component={Explore} />
       </Switch>
     </React.Fragment>
