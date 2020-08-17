@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/TelaPrincipal.css';
 
-const Button = ({ children, disabled, onClick, test, className , src}) => (
+const Button = ({ children, disabled, onClick, test, className, src }) => (
   <button
     className={className}
     type="button"
@@ -17,6 +17,7 @@ const Button = ({ children, disabled, onClick, test, className , src}) => (
 export default Button;
 
 Button.propTypes = {
+  src: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

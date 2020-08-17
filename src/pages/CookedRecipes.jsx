@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import copyToClipboard from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Image from '../components/Image';
-import copyToClipboard from 'clipboard-copy';
 import recipesPagination from '../services/recipesPagination';
 import { getLocalStorage } from '../services/localStorage';
 import ShareButton from '../images/shareIcon.svg';
-import { Link } from 'react-router-dom';
 
 const theFilter = (filter, done) => {
   if (filter === '') {
@@ -17,6 +17,7 @@ const theFilter = (filter, done) => {
   if (filter === 'bebida') {
     return done.filter((element) => element.type === filter);
   }
+  return true;
 };
 
 const CookedRecipes = () => {
@@ -41,12 +42,12 @@ const CookedRecipes = () => {
             test={`${index}-horizontal-share-btn`}
             onClick={() => {
               copyToClipboard(
-                `http://localhost:3000/${element.type}s/${element.id}`
+                `http://localhost:3000/${element.type}s/${element.id}`,
               );
               setCopy(!copy);
             }}
-              src={ShareButton}
-            >
+            src={ShareButton}
+          >
             <Image
               src={ShareButton}
               width={`${35}%`}
@@ -62,7 +63,7 @@ const CookedRecipes = () => {
             width="100px"
           />
           <Link to={`/${element.type}s/${element.id}`}>
-          <h4 data-testid={`${index}-horizontal-name`}>{element.name}</h4>
+            <h4 data-testid={`${index}-horizontal-name`}>{element.name}</h4>
           </Link>
           <div data-testid={`${index}-horizontal-top-text`}>
             {element.area} - {element.category} - {element.alcoholicOrNot}
@@ -72,14 +73,14 @@ const CookedRecipes = () => {
             {element.doneDate}
           </p>
           <p>
-            {recipesPagination(element.tags, 0, 2).map((element) => {
-              return (
-                <p data-testid={`${index}-${element}-horizontal-tag`}>
+            {recipesPagination(element.tags, 0, 2).map((e) => 
+               (
+                <p data-testid={`${index}-${e}-horizontal-tag`}>
                   {' '}
                   {element}
                 </p>
-              );
-            })}
+               )
+            )}
           </p>
         </div>
       ))}
