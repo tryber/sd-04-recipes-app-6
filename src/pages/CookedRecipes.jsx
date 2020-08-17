@@ -42,7 +42,7 @@ const CookedRecipes = () => {
             test={`${index}-horizontal-share-btn`}
             onClick={() => {
               copyToClipboard(
-                `http://localhost:3000/${element.type}s/${element.id}`
+                `http://localhost:3000/${element.type}s/${element.id}`,
               );
               setCopy(!copy);
             }}
