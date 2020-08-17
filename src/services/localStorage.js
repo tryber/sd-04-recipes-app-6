@@ -18,19 +18,43 @@ const updateLocalStorage = (type, recipeId, ingArray) => {
 
 const removeItem = (items, id) => items.filter((item) => item.id !== id);
 
-const checkExistenceInLocal = (id, key) => {
-  const getLocal = getLocalStorage(key) || [];
-  return getLocal.find((localObj) => localObj.id === id);
+const checkFavorite = (id) => {
+  const getLocal = getLocalStorage('favoriteRecipes') || [];
+  return getLocal.some((localObj) => localObj.id === id);
 };
 
 const checkInProgress = (actualId, type) => {
   const localProgressExist = getLocalStorage('inProgressRecipes');
   if (localProgressExist) {
-    return Object.keys(localProgressExist[type]).find(
+    return Object.keys(localProgressExist[type]).some(
       (idInLocal) => idInLocal === actualId,
     );
   }
   return false;
+};
+
+const updateIngredientsLocal = (id, type, selectedIngredient) => {
+  const getInProgress = getLocalStorage('inProgressRecipes');
+  if (
+    getInProgress[type][id].some((localIng) => localIng === selectedIngredient)
+  ) {
+    getInProgress[type][id] = getInProgress[type][id].filter(
+      (localIngredient) => localIngredient !== selectedIngredient,
+    );
+    return setLocalStorage('inProgressRecipes', getInProgress);
+  }
+  getInProgress[type][id].push(selectedIngredient);
+  return setLocalStorage('inProgressRecipes', getInProgress);
+};
+
+const checkIngredientLocal = (id, type, selectedIngredient) => {
+  const getInProgress = getLocalStorage('inProgressRecipes');
+  if (getInProgress) {
+    return getInProgress[type][id].some(
+      (localIng) => localIng === selectedIngredient,
+    );
+  }
+  return true;
 };
 
 const updateFavorite = (
@@ -63,6 +87,8 @@ export {
   getLocalStorage,
   updateLocalStorage,
   updateFavorite,
-  checkExistenceInLocal,
+  checkFavorite,
   checkInProgress,
+  updateIngredientsLocal,
+  checkIngredientLocal,
 };

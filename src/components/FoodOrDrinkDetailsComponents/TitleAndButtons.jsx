@@ -7,7 +7,7 @@ import FavoriteWhite from '../../images/whiteHeartIcon.svg';
 import FavoriteBlack from '../../images/blackHeartIcon.svg';
 import ShareButton from '../../images/shareIcon.svg';
 import Button from '../Button';
-import { updateFavorite, checkExistenceInLocal } from '../../services/localStorage';
+import { updateFavorite, checkFavorite } from '../../services/localStorage';
 
 const TitleAndButtons = ({
   alcoholicOrNot = '',
@@ -35,7 +35,7 @@ const TitleAndButtons = ({
         <div className="share-like-buttons-container">
           <Button
             onClick={() => {
-              copyToClipboard(`http://localhost:3000${pathname}`);
+              copyToClipboard(`http://localhost:3000/${type}s/${id}`);
               setCopy(!copy);
             }}
           >
@@ -62,7 +62,7 @@ const TitleAndButtons = ({
             <Image
               width={`${35}%`}
               test="favorite-btn"
-              src={checkExistenceInLocal(id, 'favoriteRecipes') ? FavoriteBlack : FavoriteWhite}
+              src={checkFavorite(id) ? FavoriteBlack : FavoriteWhite}
               alt="favorite-icon-button"
             />
           </Button>
