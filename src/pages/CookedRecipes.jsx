@@ -28,7 +28,7 @@ const CookedRecipes = () => {
 
   return (
     <div>
-      <Header title={'Receitas-Feitas'}/>
+      <Header title={'Receitas-Feitas'} />
       <Button onClick={() => setFilter('')} test="filter-by-all-btn">
         ALL
       </Button>
@@ -44,7 +44,7 @@ const CookedRecipes = () => {
             test={`${index}-horizontal-share-btn`}
             onClick={() => {
               copyToClipboard(
-                `http://localhost:3000/${recipe.type}s/${recipe.id}`
+                `http://localhost:3000/${recipe.type}s/${recipe.id}`,
               );
               setCopy(!copy);
             }}
