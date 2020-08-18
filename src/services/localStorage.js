@@ -1,7 +1,6 @@
-const setLocalStorage = (key, value) =>
-  localStorage.setItem(key, JSON.stringify(value));
-
+const setLocalStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 const getLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
+const clearLocalStorage = () => localStorage.clear();
 
 const updateLocalStorage = (type, recipeId, ingArray) => {
   const INITIAL_LOCAL = {
@@ -85,6 +84,7 @@ const updateFavorite = (
 export {
   setLocalStorage,
   getLocalStorage,
+  clearLocalStorage,
   updateLocalStorage,
   updateFavorite,
   checkFavorite,

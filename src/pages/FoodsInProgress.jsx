@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getDetails } from '../redux/actions/foodOrDrinkDetails';
-import { addDoneFoodRecipe, addInProgressFood } from '../redux/actions/recipesProgress';
+import { addInProgressFood, addDoneRecipe } from '../redux/actions/recipesProgress';
 import Ingredients from '../components/FoodOrDrinkDetailsComponents/Ingredients';
 import Button from '../components/Button';
 import Image from '../components/Image';
@@ -52,7 +52,7 @@ const FoodsInProgress = ({
         name: foodDetails.strMeal,
         image: foodDetails.strMealThumb,
         doneDate: new Date().toLocaleDateString(),
-        tags: foodDetails.strTags,
+        tags: foodDetails.strTags.split(','),
       };
     }
     return true;
@@ -110,7 +110,7 @@ const mapState = (state) => ({
 const mapDispatch = {
   getFoodDetailsAPI: getDetails,
   addToInProgress: addInProgressFood,
-  addToDone: addDoneFoodRecipe,
+  addToDone: addDoneRecipe,
 };
 
 export default connect(mapState, mapDispatch)(FoodsInProgress);
