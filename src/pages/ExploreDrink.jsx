@@ -3,9 +3,16 @@ import { useHistory } from 'react-router-dom'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
+import getRecipesAPI from '../services/getRecipesApi';
 
 const ExploreDrinks = () => {
   const history = useHistory();
+
+  const handleClick = () =>{
+    getRecipesAPI(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+    .then( data =>  history.push(`/bebidas/${data.drinks[0].idDrink}`));
+  }
+
   return (
   <div>
     <Header title="Explorar" />
@@ -18,7 +25,7 @@ const ExploreDrinks = () => {
       </Button>
       <Button
         data-testid="explore-surprise"
-        onClick={() => history.push('/bebidas/:id')}
+        onClick={handleClick}
       >
         Me Surpreenda!
       </Button>
