@@ -13,10 +13,10 @@ import Button from '../components/Button';
 import Image from '../components/Image';
 import '../styles/FoodDetails.css';
 import TitleAndButtons from '../components/FoodOrDrinkDetailsComponents/TitleAndButtons';
-import { updateLocalStorage, getLocalStorage, checkInProgress } from '../services/localStorage';
+import { updateLocalStorage, checkInProgress } from '../services/localStorage';
 import getIngredients from '../services/getIngredients';
 
-const FoodDetails = ({ getFoodDetailsAPI, foodDetails, addToInProgress }) => {
+const FoodDetails = ({ getFoodDetailsAPI, foodDetails, addToInProgress, doneRecipes }) => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
@@ -25,12 +25,9 @@ const FoodDetails = ({ getFoodDetailsAPI, foodDetails, addToInProgress }) => {
     );
   }, []);
 
-  const getIngredientsArray = () =>
-    getIngredients(foodDetails).map((key) => foodDetails[key]);
+  const getIngredientsArray = () => getIngredients(foodDetails).map((key) => foodDetails[key]);
 
-  const isDone =
-    getLocalStorage('doneRecipes') ||
-    [].find((recipe) => recipe.id === foodDetails.idMeal);
+  const isDone = doneRecipes.some((doneObj) => doneObj.id === id);
 
   return (
     <div>
@@ -86,6 +83,7 @@ const FoodDetails = ({ getFoodDetailsAPI, foodDetails, addToInProgress }) => {
 
 const mapState = (state) => ({
   foodDetails: state.foodOrDrinkDetails.details.meals[0],
+  doneRecipes: state.recipesProgress.doneRecipes,
 });
 
 const mapDispatch = {
@@ -99,4 +97,5 @@ FoodDetails.propTypes = {
   getFoodDetailsAPI: PropTypes.func.isRequired,
   addToInProgress: PropTypes.func.isRequired,
   foodDetails: PropTypes.objectOf(PropTypes.string).isRequired,
+  doneRecipes: PropTypes.objectOf(PropTypes.string).isRequired,
 };

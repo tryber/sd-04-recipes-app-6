@@ -2,8 +2,7 @@ import {
   ADD_IN_PROGRESS_FOOD,
   ADD_IN_PROGRESS_DRINK,
   UPDATE_IN_PROGRESS,
-  ADD_DONE_FOOD_RECIPE,
-  ADD_DONE_DRINK_RECIPE,
+  ADD_DONE_RECIPE,
 } from '../actions/recipesProgress';
 import { getLocalStorage, setLocalStorage } from '../../services/localStorage';
 
@@ -67,7 +66,7 @@ const recipesProgress = (state = INITIAL_STATE, action) => {
           },
         },
       };
-    case ADD_DONE_FOOD_RECIPE:
+    case ADD_DONE_RECIPE:
       setLocalStorage('doneRecipes', [
         ...INITIAL_STATE.doneRecipes,
         action.doneRecipeObj,
@@ -76,16 +75,6 @@ const recipesProgress = (state = INITIAL_STATE, action) => {
         ...state,
         doneRecipes: [...state.doneRecipes, action.doneRecipeObj],
       };
-    case ADD_DONE_DRINK_RECIPE:
-      setLocalStorage('doneRecipes', [
-        ...INITIAL_STATE.doneRecipes,
-        action.doneRecipeObj,
-      ]);
-      return {
-        ...state,
-        doneRecipes: [...state.doneRecipes, action.doneRecipeObj],
-      };
-
     default:
       return state;
   }
