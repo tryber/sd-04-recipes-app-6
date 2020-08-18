@@ -1,19 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Image from '../components/Image';
 import { getLocalStorage } from '../services/localStorage';
 import TitleAndButtons from '../components/FoodOrDrinkDetailsComponents/TitleAndButtons';
-import '../styles/Favorite.css'
+import '../styles/Favorite.css';
 
-const getDescriptionFavorite = (favorite) => (
-  favorite.type === 'comida' ? `${favorite.category} - ${favorite.area}` : favorite.alcoholicOrNot
-)
+const getDescriptionFavorite = (favorite) =>
+  favorite.type === 'comida'
+    ? `${favorite.category} - ${favorite.area}`
+    : favorite.alcoholicOrNot;
 
-const filterFavorites = (type, dataFavorites) =>
+const filterFavorites = (type, dataFavorites) => (
   type === 'All' ? dataFavorites : dataFavorites.filter(favorite => (
-    favorite.type === type // recebe a nova cópia completa ou parcial
-  ))
+    favorite.type === type
+    )))
 
 function FavoriteRecipes () { 
   const dataFavorites  = getLocalStorage('favoriteRecipes');
