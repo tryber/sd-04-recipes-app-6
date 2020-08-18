@@ -21,19 +21,19 @@ function App() {
   return (
     <React.Fragment>
       <Switch>
-        <Route path="/comidas/:id/in-progress" component={FoodsInProgress} />
-        <Route path="/bebidas/:id/in-progress" component={DrinksInProgress} />
-        <Route path="/comidas/:id" component={FoodDetails} />
-        <Route path="/bebidas/:id" component={DrinkDetails} />
-        <Route path="/comidas" component={Foods} />
-        <Route path="/bebidas" component={Drinks} />
+        <Route exact path="/comidas/:id/in-progress" component={FoodsInProgress} />
+        <Route exact path="/bebidas/:id/in-progress" component={DrinksInProgress} />
+        <Route exact path="/comidas/:id" component={FoodDetails} />
+        <Route exact path="/bebidas/:id" component={DrinkDetails} />
+        <Route exact path="/comidas" component={Foods} />
+        <Route exact path="/bebidas" component={Drinks} />
         <Route exact path="/" component={Login} />
-        <Route path="/explorar/comidas" component={ExploreFood} />
-        <Route path="/explorar/bebidas/ingredientes" component={ExploreDrinkIngredients} />
-        <Route path="/explorar/bebidas" component={ExploreDrink} />
-        <Route path="/explorar/comidas/ingredientes" component={ExploreFoodIngredients} />
-        <Route path="/explorar/comidas/area" component={ExploreFoodArea} />
-        <Route path="/explorar" component={Explore} />
+        <Route exact path="/explorar/comidas" component={ExploreFood} />
+        <Route exact path="/explorar/bebidas/ingredientes" component={ExploreDrinkIngredients} />
+        <Route exact path="/explorar/bebidas" component={ExploreDrink} />
+        <Route exact path="/explorar/comidas/ingredientes" component={ExploreFoodIngredients} />
+        <Route exact path="/explorar/comidas/area" component={ExploreFoodArea} />
+        <Route exact path="/explorar" component={Explore} />
       </Switch>
     </React.Fragment>
   );
