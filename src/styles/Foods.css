@@ -11,3 +11,20 @@ a {
   color: black;
   text-decoration: none;
 }
+
+.container-category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container-category button {
+  flex-basis: 15%;
+}
+
+@media screen and ( max-width : 46em ) {
+
+  .container-category button {
+    flex-basis: 25%;
+  }
+}

@@ -7,3 +7,11 @@
   position: fixed;
   width: 100%;
 }
+
+.Footer a:first-child {
+  margin-left: 10px;
+}
+
+.Footer a:last-child {
+  margin-right: 10px;
+}
