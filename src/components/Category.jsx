@@ -53,7 +53,7 @@ const Categories = ({
   const listCategories = isPageFood ? categories.meals : categories.drinks;
 
   return (
-    <div>
+    <div className="container-category">
       {listCategories &&
         recipesPagination(listCategories, 0, 5).map((el) => (
           <Button
