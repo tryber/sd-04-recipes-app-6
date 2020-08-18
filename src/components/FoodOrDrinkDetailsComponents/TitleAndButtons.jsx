@@ -17,7 +17,8 @@ const TitleAndButtons = ({
   image,
   title,
   type,
-  testid = 'favorite-btn',
+  testidFavorite = 'favorite-btn',
+  testidShare = 'share-btn',
 }) => {
   const { pathname } = useLocation();
   const [copy, setCopy] = useState(false);
@@ -42,7 +43,7 @@ const TitleAndButtons = ({
           >
             <Image
               width={`${35}%`}
-              test="share-btn"
+              test={testidShare}
               src={ShareButton}
               alt="share-icon-button"
             />
@@ -62,7 +63,7 @@ const TitleAndButtons = ({
           >
             <Image
               width={`${35}%`}
-              test={testid}
+              test={testidFavorite}
               src={checkFavorite(id) ? FavoriteBlack : FavoriteWhite}
               alt="favorite-icon-button"
             />
@@ -84,5 +85,6 @@ TitleAndButtons.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  testid: PropTypes.string.isRequired,
+  testidFavorite: PropTypes.string.isRequired,
+  testidShare: PropTypes.string.isRequired,
 };

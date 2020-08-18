@@ -9,7 +9,7 @@ import '../styles/Favorite.css';
 
 function getDescriptionFavorite(favorite) {
   return favorite.type === 'comida'
-    ? `${favorite.category} - ${favorite.area}`
+    ? `${favorite.area} - ${favorite.category}`
     : favorite.alcoholicOrNot;
 }
 
@@ -34,6 +34,7 @@ function FavoriteRecipes() {
             onClick={() => {
               setTypeFilter('All');
             }}
+            test="filter-by-all-btn"
           >
             All
           </Button>
@@ -41,6 +42,7 @@ function FavoriteRecipes() {
             onClick={() => {
               setTypeFilter('comida');
             }}
+            test="filter-by-food-btn"
           >
             Food
           </Button>
@@ -48,6 +50,7 @@ function FavoriteRecipes() {
             onClick={() => {
               setTypeFilter('bebida');
             }}
+            test="filter-by-drink-btn"
           >
             Drinks
           </Button>
@@ -60,11 +63,12 @@ function FavoriteRecipes() {
                   to={`/${favorite.type}s/${favorite.id}`}
                   src={favorite.image}
                   alt={favorite.name}
+                  test={`${index}-horizontal-image`}
                 />
               </div>
               <div className="favorite-card-details">
-                <span>{getDescriptionFavorite(favorite)}</span>
-                <h1 className="favorite-card-details-title">{favorite.name}</h1>
+                <span data-testid={`${index}-horizontal-top-text`}>{getDescriptionFavorite(favorite)}</span>
+                <h1 data-testid={`${index}-horizontal-name`} className="favorite-card-details-title">{favorite.name}</h1>
                 <TitleAndButtons
                   alcoholicOrNot={favorite.alcoholicOrNot}
                   title={favorite.name}
@@ -73,7 +77,8 @@ function FavoriteRecipes() {
                   type={favorite.type}
                   id={favorite.id}
                   category={favorite.category}
-                  testid={`${index}-horizontal-favorite-btn`}
+                  testidFavorite={`${index}-horizontal-favorite-btn`}
+                  testidShare={`${index}-horizontal-share-btn`}
                 />
               </div>
             </div>
