@@ -1,35 +1,56 @@
-import React, { Component, useEffect } from 'react';
+import React, {useState} from 'react';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Image from '../components/Image';
 import { getLocalStorage } from '../services/localStorage';
 import TitleAndButtons from '../components/FoodOrDrinkDetailsComponents/TitleAndButtons';
+import '../styles/Favorite.css'
 
 const getDescriptionFavorite = (favorite) => (
   favorite.type === 'comida' ? `${favorite.category} - ${favorite.area}` : favorite.alcoholicOrNot
 )
-function FavoriteRecipes () {
-  const dataFavorites  = getLocalStorage('favoriteRecipes')
 
-  console.log(dataFavorites);
+const filterFavorites = (type, dataFavorites) =>
+  type === 'All' ? dataFavorites : dataFavorites.filter(favorite => (
+    favorite.type === type // recebe a nova cópia completa ou parcial
+  ))
+
+function FavoriteRecipes () { 
+  const dataFavorites  = getLocalStorage('favoriteRecipes');
+// 
+  const [typeFilter, setTypeFilter] = useState('All');
+  const favoritesAll = filterFavorites(typeFilter, dataFavorites);
+
     return (
       <div>
         <Header title={"Receitas Favoritas"}/>
-        <div>
-          <Button>All</Button>
-          <Button>Food</Button>
-          <Button>Drinks</Button>
-        </div>
-        {dataFavorites.map((favorite, index) =>(
-          <div key={favorite.name}>
-            <Image to={''} src={favorite.image} alt={favorite.name} />
-            <div>
-        <span>{getDescriptionFavorite(favorite)}</span>
-        <h1>{favorite.name}</h1>
-        <TitleAndButtons />
-            </div>
+        <div className="favorite">
+          <div className="favorite-category">
+            <Button onClick={()=>{
+              setTypeFilter('All')
+            }}>All</Button>
+            <Button onClick={()=>{
+              setTypeFilter('comida')
+            }}>Food</Button>
+            <Button onClick={()=>{
+              setTypeFilter('bebida')
+            }}>Drinks</Button>
           </div>
-        ))}
+          {favoritesAll.map((favorite) =>(
+            <div className="favorite-card" key={favorite.name}>
+              <div className="favorite-card-details">
+                <Image to={''} src={favorite.image} alt={favorite.name} />
+              </div>
+              <div className="favorite-card-details">
+                <span>{getDescriptionFavorite(favorite)}</span>
+                <h1>{favorite.name}</h1>
+                <TitleAndButtons alcoholicOrNot={favorite.alcoholicOrNot}title={favorite.name}
+                area={favorite.area}image={favorite.image}type={favorite.type}
+                id={favorite.id} category={favorite.category} />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
