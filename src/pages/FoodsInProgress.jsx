@@ -52,7 +52,7 @@ const FoodsInProgress = ({
         name: foodDetails.strMeal,
         image: foodDetails.strMealThumb,
         doneDate: new Date().toLocaleDateString(),
-        tags: foodDetails.strTags,
+        tags: foodDetails.strTags.split(','),
       };
     }
     return true;
