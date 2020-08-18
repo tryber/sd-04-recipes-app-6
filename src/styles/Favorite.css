@@ -46,17 +46,15 @@
   font-size: 0.875em;
 }
 
-.favorite-card-details h1 {
+.favorite-card-details .favorite-card-details-title {
   font-size: 1.5em;
   margin: 0;
-
 }
 
 .favorite-card-details .nav-title-buttons {
   display: inline;
 }
 
-.favorite-card-details .nav-title-buttons h3, 
-.favorite-card-details .nav-title-buttons h4 {
+.favorite-card-details .favorite-remove {
   display: none;
 }

@@ -17,6 +17,7 @@ const TitleAndButtons = ({
   image,
   title,
   type,
+  testid = 'favorite-btn',
 }) => {
   const { pathname } = useLocation();
   const [copy, setCopy] = useState(false);
@@ -24,7 +25,7 @@ const TitleAndButtons = ({
   return (
     <div>
       <div className="nav-title-buttons">
-        <div>
+        <div className="favorite-remove">
           <h3 data-testid="recipe-title" className="details-name">
             {title}
           </h3>
@@ -61,7 +62,7 @@ const TitleAndButtons = ({
           >
             <Image
               width={`${35}%`}
-              test="favorite-btn"
+              test={testid}
               src={checkFavorite(id) ? FavoriteBlack : FavoriteWhite}
               alt="favorite-icon-button"
             />
@@ -83,4 +84,5 @@ TitleAndButtons.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  testid: PropTypes.string.isRequired,
 };

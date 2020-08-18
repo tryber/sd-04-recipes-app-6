@@ -51,14 +51,14 @@ function FavoriteRecipes() {
           </Button>
         </div>
         {favoritesAll.map((favorite, index) => (
-            <Link to={`/comidas/${favorite.id}`}>
+            <Link to={`/${favorite.type}s/${favorite.id}`}>
           <div className="favorite-card" key={favorite.name}>
             <div className="favorite-card-details">
-              <Image to={`/comidas/${favorite.id}`} src={favorite.image} alt={favorite.name} />
+              <Image to={`/${favorite.type}s/${favorite.id}`} src={favorite.image} alt={favorite.name} />
             </div>
             <div className="favorite-card-details">
               <span>{getDescriptionFavorite(favorite)}</span>
-              <h1>{favorite.name}</h1>
+              <h1 className="favorite-card-details-title">{favorite.name}</h1>
               <TitleAndButtons
                 alcoholicOrNot={favorite.alcoholicOrNot}
                 title={favorite.name}
@@ -67,7 +67,7 @@ function FavoriteRecipes() {
                 type={favorite.type}
                 id={favorite.id}
                 category={favorite.category}
-                data-testid={`${index}-horizontal-favorite-btn`}
+                testid={`${index}-horizontal-favorite-btn`}
               />
             </div>
           </div>
