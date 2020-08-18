@@ -15,6 +15,9 @@ import ExploreDrink from './pages/ExploreDrink';
 import ExploreFoodIngredients from './pages/ExploreFoodIngredients';
 import ExploreDrinkIngredients from './pages/ExploreDrinkIngredients';
 import ExploreFoodArea from './pages/ExploreFoodArea';
+import CookedRecipes from './pages/CookedRecipes';
+import Profile from './pages/Profile';
+import UserProvider from './context/UserContext';
 
 
 function App() {
@@ -34,6 +37,17 @@ function App() {
         <Route exact path="/explorar/comidas/ingredientes" component={ExploreFoodIngredients} />
         <Route exact path="/explorar/comidas/area" component={ExploreFoodArea} />
         <Route exact path="/explorar" component={Explore} />
+        <Route path="/receitas-feitas" component={CookedRecipes} />
+        <Route path="/comidas/:id/in-progress" component={FoodsInProgress} />
+        <Route path="/bebidas/:id/in-progress" component={DrinksInProgress} />
+        <Route path="/comidas/:id" component={FoodDetails} />
+        <Route path="/bebidas/:id" component={DrinkDetails} />
+        <Route path="/comidas" component={Foods} />
+        <Route path="/bebidas" component={Drinks} />
+        <UserProvider>
+          <Route exact path="/perfil" component={Profile} />
+          <Route exact path="/" component={Login} />
+        </UserProvider>
       </Switch>
     </React.Fragment>
   );

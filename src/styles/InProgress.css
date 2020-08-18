@@ -1,0 +1,14 @@
+.ingredients {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+input:checked + label {
+  text-decoration: line-through;
+}
