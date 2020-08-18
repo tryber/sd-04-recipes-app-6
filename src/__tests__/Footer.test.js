@@ -1,5 +1,5 @@
 import React from 'react';
-import cleanup, { fireEvent, waitForDomChange } from '@testing-library/react';
+import cleanup, { fireEvent, waitForDomChange, waitFor } from '@testing-library/react';
 import renderWithRouter from '../Helper/renderWithRouter';
 import renderWithRedux from '../Helper/renderWithRedux';
 import Footer from '../components/Footer';
@@ -35,14 +35,16 @@ describe('Testes component Footer', () => {
   })
   test('Click dos botoes', async () => {
     const { getByText, getByTestId } = renderWithRedux(renderWithRouter(<App />, ['/comidas']));
-    await waitForDomChange();
+    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
     expect(getByText('Comidas')).toBeInTheDocument();
     const bebidas = getByTestId('drinks-bottom-btn');
     fireEvent.click(bebidas);
-    await waitForDomChange(() => expect(getByText('Bebidas')).toBeInTheDocument());
+    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(4));
+    expect(getByText('Bebidas')).toBeInTheDocument()
     expect(getByTestId('0-recipe-card')).toBeInTheDocument();
     const comidas = getByTestId('food-bottom-btn');
     fireEvent.click(comidas);
-    await waitForDomChange(() => expect(getByText('Comidas')).toBeInTheDocument());
+    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(6));
+    expect(getByText('Comidas')).toBeInTheDocument();
    })
 })
