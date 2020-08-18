@@ -75,7 +75,7 @@ const CookedRecipes = () => {
             {recipe.doneDate}
           </p>
           <div>
-            {recipesPagination(recipe.tags, 0, 2).map((tag) => (
+            {recipe.tags && recipesPagination(recipe.tags, 0, 2).map((tag) => (
               <p data-testid={`${index}-${tag}-horizontal-tag`}> {tag}</p>
             ))}
           </div>
