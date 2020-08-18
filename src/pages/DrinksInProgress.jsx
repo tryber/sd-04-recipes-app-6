@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { getDetails } from '../redux/actions/foodOrDrinkDetails';
 import {
   addInProgressDrink,
-  addDoneDrinkRecipe,
+  addDoneRecipe,
 } from '../redux/actions/recipesProgress';
 import Ingredients from '../components/FoodOrDrinkDetailsComponents/Ingredients';
 import Button from '../components/Button';
@@ -119,7 +119,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getDrinkDetailsAPI: getDetails,
-  addToDone: addDoneDrinkRecipe,
+  addToDone: addDoneRecipe,
   addToInProgress: addInProgressDrink,
 };
 
