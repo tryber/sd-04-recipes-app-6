@@ -9,6 +9,8 @@ import Foods from './pages/Foods';
 import FoodsInProgress from './pages/FoodsInProgress';
 import DrinksInProgress from './pages/DrinksInProgress';
 import DrinkDetails from './pages/DrinkDetails';
+import Profile from './pages/Profile';
+import UserProvider from './context/UserContext';
 
 function App() {
   return (
@@ -20,7 +22,10 @@ function App() {
         <Route path="/bebidas/:id" component={DrinkDetails} />
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
-        <Route exact path="/" component={Login} />
+        <UserProvider>
+          <Route exact path="/perfil" component={Profile} />
+          <Route exact path="/" component={Login} />
+        </UserProvider>
       </Switch>
     </React.Fragment>
   );
