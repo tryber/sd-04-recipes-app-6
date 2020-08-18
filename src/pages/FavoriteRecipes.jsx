@@ -7,15 +7,17 @@ import { getLocalStorage } from '../services/localStorage';
 import TitleAndButtons from '../components/FoodOrDrinkDetailsComponents/TitleAndButtons';
 import '../styles/Favorite.css';
 
-const getDescriptionFavorite = (favorite) =>
-  favorite.type === 'comida'
+function getDescriptionFavorite(favorite) {
+  return favorite.type === 'comida'
     ? `${favorite.category} - ${favorite.area}`
     : favorite.alcoholicOrNot;
+}
 
-const filterFavorites = (type, dataFavorites) =>
-  type === 'All'
+function filterFavorites(type, dataFavorites) {
+  return type === 'All'
     ? dataFavorites
     : dataFavorites.filter((favorite) => favorite.type === type);
+}
 
 function FavoriteRecipes() {
   const dataFavorites = getLocalStorage('favoriteRecipes');
@@ -51,26 +53,30 @@ function FavoriteRecipes() {
           </Button>
         </div>
         {favoritesAll.map((favorite, index) => (
-            <Link to={`/${favorite.type}s/${favorite.id}`}>
-          <div className="favorite-card" key={favorite.name}>
-            <div className="favorite-card-details">
-              <Image to={`/${favorite.type}s/${favorite.id}`} src={favorite.image} alt={favorite.name} />
+          <Link to={`/${favorite.type}s/${favorite.id}`}>
+            <div className="favorite-card" key={favorite.name}>
+              <div className="favorite-card-details">
+                <Image
+                  to={`/${favorite.type}s/${favorite.id}`}
+                  src={favorite.image}
+                  alt={favorite.name}
+                />
+              </div>
+              <div className="favorite-card-details">
+                <span>{getDescriptionFavorite(favorite)}</span>
+                <h1 className="favorite-card-details-title">{favorite.name}</h1>
+                <TitleAndButtons
+                  alcoholicOrNot={favorite.alcoholicOrNot}
+                  title={favorite.name}
+                  area={favorite.area}
+                  image={favorite.image}
+                  type={favorite.type}
+                  id={favorite.id}
+                  category={favorite.category}
+                  testid={`${index}-horizontal-favorite-btn`}
+                />
+              </div>
             </div>
-            <div className="favorite-card-details">
-              <span>{getDescriptionFavorite(favorite)}</span>
-              <h1 className="favorite-card-details-title">{favorite.name}</h1>
-              <TitleAndButtons
-                alcoholicOrNot={favorite.alcoholicOrNot}
-                title={favorite.name}
-                area={favorite.area}
-                image={favorite.image}
-                type={favorite.type}
-                id={favorite.id}
-                category={favorite.category}
-                testid={`${index}-horizontal-favorite-btn`}
-              />
-            </div>
-          </div>
           </Link>
         ))}
       </div>

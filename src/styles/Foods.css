@@ -22,7 +22,7 @@ a {
   flex-basis: 15%;
 }
 
-@media screen and ( max-width : 46em) {
+@media screen and ( max-width : 46em ) {
 
   .container-category button {
     flex-basis: 25%;
