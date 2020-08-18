@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Image from '../components/Image';
 import recipesPagination from '../services/recipesPagination';
 import { getLocalStorage } from '../services/localStorage';
+import Header from '../components/Header';
 import ShareButton from '../images/shareIcon.svg';
 
 const theFilter = (filter, done) => {
@@ -27,6 +28,7 @@ const CookedRecipes = () => {
 
   return (
     <div>
+      <Header title={'Receitas-Feitas'}/>
       <Button onClick={() => setFilter('')} test="filter-by-all-btn">
         ALL
       </Button>
@@ -42,7 +44,7 @@ const CookedRecipes = () => {
             test={`${index}-horizontal-share-btn`}
             onClick={() => {
               copyToClipboard(
-                `http://localhost:3000/${recipe.type}s/${recipe.id}`,
+                `http://localhost:3000/${recipe.type}s/${recipe.id}`
               );
               setCopy(!copy);
             }}
@@ -72,11 +74,11 @@ const CookedRecipes = () => {
             {' '}
             {recipe.doneDate}
           </p>
-          <p>
+          <div>
             {recipesPagination(recipe.tags, 0, 2).map((tag) => (
               <p data-testid={`${index}-${tag}-horizontal-tag`}> {tag}</p>
             ))}
-          </p>
+          </div>
         </div>
       ))}
     </div>
