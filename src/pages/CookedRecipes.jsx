@@ -36,13 +36,13 @@ const CookedRecipes = () => {
       <Button onClick={() => setFilter('bebida')} test="filter-by-drink-btn">
         DRINKS
       </Button>
-      {theFilter(filter, done).map((element, index) => (
+      {theFilter(filter, done).map((recipe, index) => (
         <div>
           <Button
             test={`${index}-horizontal-share-btn`}
             onClick={() => {
               copyToClipboard(
-                `http://localhost:3000/${element.type}s/${element.id}`,
+                `http://localhost:3000/${recipe.type}s/${recipe.id}`,
               );
               setCopy(!copy);
             }}
@@ -57,24 +57,24 @@ const CookedRecipes = () => {
           </Button>
           {copy && <span>Link copiado!</span>}
           <Image
-            to={`/${element.type}s/${element.id}`}
-            src={element.image}
+            to={`/${recipe.type}s/${recipe.id}`}
+            src={recipe.image}
             test={`${index}-horizontal-image`}
             width="100px"
           />
-          <Link to={`/${element.type}s/${element.id}`}>
-            <h4 data-testid={`${index}-horizontal-name`}>{element.name}</h4>
+          <Link to={`/${recipe.type}s/${recipe.id}`}>
+            <h4 data-testid={`${index}-horizontal-name`}>{recipe.name}</h4>
           </Link>
           <div data-testid={`${index}-horizontal-top-text`}>
-            {element.area} - {element.category} - {element.alcoholicOrNot}
+            {recipe.area} - {recipe.category} - {recipe.alcoholicOrNot}
           </div>
           <p data-testid={`${index}-horizontal-done-date`}>
             {' '}
-            {element.doneDate}
+            {recipe.doneDate}
           </p>
           <p>
-            {recipesPagination(element.tags, 0, 2).map((e) => (
-              <p data-testid={`${index}-${e}-horizontal-tag`}> {element}</p>
+            {recipesPagination(recipe.tags, 0, 2).map((tag) => (
+              <p data-testid={`${index}-${tag}-horizontal-tag`}> {tag}</p>
             ))}
           </p>
         </div>
