@@ -10,6 +10,7 @@ import FoodsInProgress from './pages/FoodsInProgress';
 import DrinksInProgress from './pages/DrinksInProgress';
 import DrinkDetails from './pages/DrinkDetails';
 import CookedRecipes from './pages/CookedRecipes';
+import FoodArea from './pages/FoodArea';
 import Profile from './pages/Profile';
 import UserProvider from './context/UserContext';
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/bebidas/:id" component={DrinkDetails} />
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
+        <Route path="/explorar/comidas/area" component={FoodArea} />
         <UserProvider>
           <Route exact path="/perfil" component={Profile} />
           <Route exact path="/" component={Login} />
