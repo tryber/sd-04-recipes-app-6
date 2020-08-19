@@ -1,9 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function ExploreFoodArea() {
-  return (
-    <div>
-      FoodArea
-    </div>
-  )
+  return <div>FoodArea</div>;
 }

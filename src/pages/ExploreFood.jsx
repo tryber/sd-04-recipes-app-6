@@ -8,7 +8,7 @@ import getRecipesAPI from '../services/getRecipesApi';
 const ExploreFood = () => {
   const history = useHistory();
   const handleClick = () => {
-    getRecipesAPI(`https://www.themealdb.com/api/json/v1/1/random.php`).then((data) =>
+    getRecipesAPI('https://www.themealdb.com/api/json/v1/1/random.php').then((data) =>
       history.push(`/comidas/${data.meals[0].idMeal}`),
     );
   };
@@ -23,10 +23,7 @@ const ExploreFood = () => {
         >
           Por Ingredientes
         </Button>
-        <Button
-          test="explore-by-area"
-          onClick={() => history.push('/explorar/comidas/area')}
-        >
+        <Button test="explore-by-area" onClick={() => history.push('/explorar/comidas/area')}>
           Por Local de Origem
         </Button>
         <Button test="explore-surprise" onClick={handleClick}>
