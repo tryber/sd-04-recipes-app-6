@@ -18,25 +18,25 @@ afterEach(() => {
 describe('Testes na tela de Receitas Favoritas', () => {
   it('Verificando se esta na tela Receitas Favoritas', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
   it('Verificando se montou o card corretamente: Imagem, categoria/area, Título, btnShare e btnFavorite', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
   it('Verificando possue os botões de filtragem Comida, Bebida e All', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
   it('Verificando se ao clicar np botão de filtragem Comida traz somente comidas', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
@@ -45,26 +45,26 @@ describe('Testes na tela de Receitas Favoritas', () => {
       'e após clicar no botão de filtragem All, traz comidas e bebidas',
     async () => {
       const { getByTestId } = renderWithRedux(
-        renderWithRouter(<App />, ['/comidas'])
+        renderWithRouter(<App />, ['/receitas-favoritas'])
       );
     }
   );
 
   it('Verificando se ao clicar no botão de favoritar, remove o item', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
   it('Verificando se ao clicar no botão de compartilhar, ele copia para o clipBoard', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
   it('Verificando se clicar no card, redireciona para a tela de Detalhes ', async () => {
     const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
+      renderWithRouter(<App />, ['/receitas-favoritas'])
     );
   });
 
