@@ -10,12 +10,12 @@ const requestArea = () => ({
 });
 
 const requestAreaFailure = (error) => ({
-  type:REQUEST_AREA_FAILURE,
+  type: REQUEST_AREA_FAILURE,
   error,
 });
 
 const requestAreaSuccess = (data) => ({
-  type:REQUEST_AREA_SUCCESS,
+  type: REQUEST_AREA_SUCCESS,
   data,
 });
 
@@ -23,6 +23,6 @@ export const getArea = (url) => (dispatch) => {
   dispatch(requestArea());
   return getRecipesAPI(url).then(
     (data) => dispatch(requestAreaSuccess(data)),
-    (error) => dispatch(requestAreaFailure(error)),
+    (error) => dispatch(requestAreaFailure(error))
   );
 };
