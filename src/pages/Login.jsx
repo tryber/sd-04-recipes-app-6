@@ -13,7 +13,7 @@ const Login = () => {
 
   if (isRedirect) return <Redirect to="/comidas" />;
   return (
-    <div id="Login">
+    <div className="Login">
       <h1>Login</h1>
       <Input
         test="email-input"
