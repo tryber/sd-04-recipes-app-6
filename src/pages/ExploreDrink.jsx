@@ -9,8 +9,9 @@ const ExploreDrinks = () => {
   const history = useHistory();
 
   const handleClick = () => {
-    getRecipesAPI('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      .then((data) => history.push(`/bebidas/${data.drinks[0].idDrink}`));
+    getRecipesAPI('https://www.thecocktaildb.com/api/json/v1/1/random.php').then((data) =>
+      history.push(`/bebidas/${data.drinks[0].idDrink}`),
+    );
   };
 
   return (
@@ -18,15 +19,12 @@ const ExploreDrinks = () => {
       <Header title="Explorar" />
       <div className="explore">
         <Button
-          data-testid="explore-by-ingredient"
+          test="explore-by-ingredient"
           onClick={() => history.push('/explorar/bebidas/ingredientes')}
         >
           Por Ingredientes
         </Button>
-        <Button
-          data-testid="explore-surprise"
-          onClick={handleClick}
-        >
+        <Button test="explore-surprise" onClick={handleClick}>
           Me Surpreenda!
         </Button>
       </div>

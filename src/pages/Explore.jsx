@@ -10,11 +10,11 @@ const Explore = () => {
     <div>
       <Header title="Explorar" />
       <div className="explore">
-        <Button data-testid="explore-food" onClick={() => history.push('/explorar/comidas')}>
+        <Button test="explore-food" onClick={() => history.push('/explorar/comidas')}>
           Explorar Comidas
         </Button>
         <Button
-          data-testid="explore-drinks"
+          test="explore-drinks"
           onClick={() => {
             history.push('/explorar/bebidas');
           }}

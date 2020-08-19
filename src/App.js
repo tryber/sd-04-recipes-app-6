@@ -30,7 +30,6 @@ function App() {
         <Route exact path="/bebidas/:id" component={DrinkDetails} />
         <Route exact path="/comidas" component={Foods} />
         <Route exact path="/bebidas" component={Drinks} />
-        <Route exact path="/" component={Login} />
         <Route exact path="/explorar/comidas" component={ExploreFood} />
         <Route exact path="/explorar/bebidas/ingredientes" component={ExploreDrinkIngredients} />
         <Route exact path="/explorar/bebidas" component={ExploreDrink} />

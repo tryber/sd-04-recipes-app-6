@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import getRecipesAPI from '../services/getRecipesApi';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import recipesPagination from '../services/recipesPagination';
 
 function ExploreFoodIngredients() {
   const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
@@ -13,10 +14,11 @@ function ExploreFoodIngredients() {
   return (
     <div className="food-ingredients" >
       <Header />
-      {ingredients.map((el, i) => (
-        <div>
+      {recipesPagination(ingredients, 0, 12).map((el, i) => (
+        <div data-testid={`${i}-ingredient-card`}>
           <p data-testid={`${i}-card-name`}>{el.strIngredient}</p>
           <img
+            width="100px"
             src={`https://www.themealdb.com/images/ingredients/${el.strIngredient}.png`}
             alt="thumbnail"
             data-testid={`${i}-card-img`}
