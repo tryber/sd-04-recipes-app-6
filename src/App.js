@@ -12,7 +12,7 @@ import DrinkDetails from './pages/DrinkDetails';
 import CookedRecipes from './pages/CookedRecipes';
 import Profile from './pages/Profile';
 import UserProvider from './context/UserContext';
-
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
@@ -25,6 +25,9 @@ function App() {
         <Route path="/bebidas/:id" component={DrinkDetails} />
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
+        <Route path="/receitas-favoritas" component={FavoriteRecipes} />
+        <Route path="/receitas-favoritas" component={FavoriteRecipes} />
+        <Route exact path="/" component={Login} />
         <UserProvider>
           <Route exact path="/perfil" component={Profile} />
           <Route exact path="/" component={Login} />
