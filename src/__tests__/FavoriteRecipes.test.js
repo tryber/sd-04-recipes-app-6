@@ -19,6 +19,7 @@ afterEach(() => {
 getRecipesApi.mockImplementationOnce(() =>
   Promise.resolve(detailsFoodFavorite52785Mock)
 );
+
 getRecipesApi.mockImplementationOnce(() =>
   Promise.resolve(drinkRecommendationsMock)
 );
