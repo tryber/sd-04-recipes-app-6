@@ -13,7 +13,7 @@ function ExploreDrinkIngredients() {
 
   return (
     <div>
-      <Header title="Explorar Ingredientes" searchEnabled={false}/>
+      <Header />
       {ingredients.map((el, i) => (
         <div>
           <p data-testid={`${i}-card-name`}>{el.strIngredient1}</p>
