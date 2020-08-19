@@ -1,5 +1,5 @@
 import React from 'react';
-import cleanup, { waitFor, fireEvent } from '@testing-library/react';
+import cleanup, { waitFor, fireEvent, screen } from '@testing-library/react';
 import renderWithRouter from '../Helper/renderWithRouter';
 import renderWithRedux from '../Helper/renderWithRedux';
 import App from '../App';
@@ -119,16 +119,6 @@ describe('Testes na tela de Receitas Favoritas', () => {
     expect(getByTestId('1-horizontal-name')).toHaveTextContent('B-52');
     expect(queryAllByTestId(/-horizontal-name$/)).toHaveLength(3);
   });
-
-  // it('Verificando se ao clicar no botão de compartilhar, ele copia para o clipBoard', async () => {
-  //   const { getByTestId, getByText } = renderWithRedux(
-  //     renderWithRouter(<App />, ['/receitas-favoritas'])
-  //   );
-
-  //   expect(getByTestId('0-horizontal-share-btn')).toBeInTheDocument();
-  //   fireEvent.click(getByTestId('0-horizontal-share-btn'));
-  //   expect(getByText('Link copiado!')).toBeInTheDocument();
-  // });
 
   it('Verificando se clicar no card, redireciona para a tela de Detalhes ', async () => {
     const { getByTestId, getByText } = renderWithRedux(
