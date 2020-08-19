@@ -23,20 +23,7 @@ const FoodArea = ({ getArea, area, loadingArea, recipesFoods, dataFoods }) => {
           )}
         </select>
       )}
-      {dataFoods && (<div className="list">
-              {recipesPagination(dataFoods, 0, 12).map(
-                (food, index) => (
-                  <div className="cardBorder">
-                    <RecipesCard
-                      title={food.strMeal}
-                      srcImagem={food.strMealThumb}
-                      to={`/comidas/${food.idMeal}`}
-                      testImage={`${index}-card-img`}
-                      testName={`${index}-card-name`}
-                      testCard={`${index}-recipe-card`}
-                    />
-                  </div>
-                  )}
+      {dataFoods && (dataFoods.map((element,index) => { return <p key={index}>{element.strMeal}</p>}))}
     </div>
   );
 };
