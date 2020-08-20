@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getArea } from '../redux/actions/area';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
 import RecipesCard from '../components/RecipesCard';
@@ -30,11 +31,11 @@ const FoodArea = ({ areaAPI, area, loadingArea, recipesFoods, dataFoods }) => {
             data-testid="explore-by-area-dropdown"
             onChange={(event) => setArea(event.target.value)}
           >
-            <option key="0" data-testid="All-option">
+            <option key="All" data-testid="All-option">
               All
             </option>
-            {area.meals.map((regioes, index) => (
-              <option key={index + 1} data-testid={`${regioes.strArea}-option`}>
+            {area.meals.map((regioes) => (
+              <option key={regioes.strArea} data-testid={`${regioes.strArea}-option`}>
                 {regioes.strArea}
               </option>
             ))}
@@ -69,5 +70,13 @@ const mapDispatchToProps = {
   areaAPI: getArea,
   recipesFoods: getFoodsAndDrinks,
 };
+
+FoodArea.prototype = {
+  area: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataFoods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loadingArea: PropTypes.bool.isRequired,
+  areaAPI: PropTypes.func.isRequired,
+  recipesFoods: PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoodArea);
