@@ -23,6 +23,6 @@ export const getArea = (url) => (dispatch) => {
   dispatch(requestArea());
   return getRecipesAPI(url).then(
     (data) => dispatch(requestAreaSuccess(data)),
-    (error) => dispatch(requestAreaFailure(error))
+    (error) => dispatch(requestAreaFailure(error)),
   );
 };

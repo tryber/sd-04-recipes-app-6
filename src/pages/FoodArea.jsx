@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getArea } from '../redux/actions/area';
 import { getFoodsAndDrinks } from '../redux/actions/foodAndDrinks';
+import RecipesCard from '../components/RecipesCard';
+import recipesPagination from '../services/recipesPagination';
 import '../styles/TelaPrincipal.css';
+import Header from '../components/Header';
 
-const FoodArea = ({ getArea, area, loadingArea, recipesFoods, dataFoods }) => {
+const FoodArea = ({ areaAPI, area, loadingArea, recipesFoods, dataFoods }) => {
   const [tempArea, setArea] = useState('All');
   useEffect(() => {
-    getArea('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    areaAPI('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
     if (tempArea !== 'All') {
       recipesFoods(
         `https://www.themealdb.com/api/json/v1/1/filter.php?a=${tempArea}`,
@@ -19,19 +22,39 @@ const FoodArea = ({ getArea, area, loadingArea, recipesFoods, dataFoods }) => {
   }, [tempArea]);
   return (
     <div>
+      <Header isSearchActive={false} title="AREA" />
       {loadingArea && <h3>...carregando</h3>}
       {area && dataFoods && (
-        <select onChange={(event) => setArea(event.target.value)}>
-          <option key="0">All</option>
-          {area.meals.map((regioes, index) => (
-            <option key={index + 1}>{regioes.strArea}</option>
-          ))}
-        </select>
+        <div>
+          <select
+            data-testid="explore-by-area-dropdown"
+            onChange={(event) => setArea(event.target.value)}
+          >
+            <option key="0" data-testid="All-option">
+              All
+            </option>
+            {area.meals.map((regioes, index) => (
+              <option key={index + 1} data-testid={`${regioes.strArea}-option`}>
+                {regioes.strArea}
+              </option>
+            ))}
+          </select>
+          <div className="list">
+            {recipesPagination(dataFoods, 0, 12).map((food, index) => (
+              <div className="cardBorder">
+                <RecipesCard
+                  title={food.strMeal}
+                  srcImagem={food.strMealThumb}
+                  to={`/comidas/${food.idMeal}`}
+                  testImage={`${index}-card-img`}
+                  testName={`${index}-card-name`}
+                  testCard={`${index}-recipe-card`}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       )}
-      {dataFoods &&
-        dataFoods.map((element, index) => {
-          return <p key={index}>{element.strMeal}</p>;
-        })}
     </div>
   );
 };
@@ -43,7 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getArea: getArea,
+  areaAPI: getArea,
   recipesFoods: getFoodsAndDrinks,
 };
 
