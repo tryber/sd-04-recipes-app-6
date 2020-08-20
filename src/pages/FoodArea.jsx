@@ -71,7 +71,7 @@ const mapDispatchToProps = {
   recipesFoods: getFoodsAndDrinks,
 };
 
-FoodArea.prototype = {
+FoodArea.propTypes = {
   area: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataFoods: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadingArea: PropTypes.bool.isRequired,
