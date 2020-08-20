@@ -44,7 +44,6 @@ function App() {
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
         <Route path="/receitas-favoritas" component={FavoriteRecipes} />
-        <Route path="/receitas-favoritas" component={FavoriteRecipes} />
         <UserProvider>
           <Route exact path="/perfil" component={Profile} />
           <Route exact path="/" component={Login} />

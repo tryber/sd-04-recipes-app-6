@@ -130,42 +130,47 @@ describe('Testes na tela de comida', () => {
     expect(headerTitle).toBeInTheDocument();
   });
 
-  it('Verificando se ao clicar no botão Beef, traz as receitas relacionadas'+
-  'e ao clicar novamente traz as receitas da API sem filtros', async () => {
-    const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
-    );
-    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
-    const category = getByTestId('Beef-category-filter');
-    expect(category).toHaveTextContent('Beef');
-    fireEvent.click(category);
-    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(3));
-    expect(getByTestId('0-card-name')).toHaveTextContent(
-      'Beef and Mustard Pie'
-    );
-    expect(category).toHaveTextContent('Beef');
-    fireEvent.click(category);
-    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(4));
-    expect(getByTestId('2-card-name')).toHaveTextContent('Dal fry');
-  });
+  it(
+    'Verificando se ao clicar no botão Beef, traz as receitas relacionadas' +
+      'e ao clicar novamente traz as receitas da API sem filtros',
+    async () => {
+      const { getByTestId } = renderWithRedux(
+        renderWithRouter(<App />, ['/comidas'])
+      );
+      await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
+      const category = getByTestId('Beef-category-filter');
+      expect(category).toHaveTextContent('Beef');
+      fireEvent.click(category);
+      await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(3));
+      expect(getByTestId('0-card-name')).toHaveTextContent(
+        'Beef and Mustard Pie'
+      );
+      expect(category).toHaveTextContent('Beef');
+      fireEvent.click(category);
+      await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(4));
+      expect(getByTestId('2-card-name')).toHaveTextContent('Dal fry');
+    }
+  );
 
-  it('Verificando se ao clicar no botão Beef, traz as receitas relacionadas'+
-  'e ao clicar no botão All remove o filtro de Beef e traz receitas da Api sem filtros', async () => {
-    const { getByTestId } = renderWithRedux(
-      renderWithRouter(<App />, ['/comidas'])
-    );
-    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
-    const category = getByTestId('Beef-category-filter');
-    expect(category).toHaveTextContent('Beef');
-    fireEvent.click(category);
-    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(3));
-    expect(getByTestId('5-card-name')).toHaveTextContent(
-      'Beef Dumpling Stew'
-    );
-    expect(getByTestId('All-category-filter')).toHaveTextContent('All');
-    fireEvent.click(category);
-    await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(4));
-    expect(getByTestId('11-card-name')).toHaveTextContent('Pancakes');
-  });
-
+  it(
+    'Verificando se ao clicar no botão Beef, traz as receitas relacionadas' +
+      'e ao clicar no botão All remove o filtro de Beef e traz receitas da Api sem filtros',
+    async () => {
+      const { getByTestId } = renderWithRedux(
+        renderWithRouter(<App />, ['/comidas'])
+      );
+      await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(2));
+      const category = getByTestId('Beef-category-filter');
+      expect(category).toHaveTextContent('Beef');
+      fireEvent.click(category);
+      await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(3));
+      expect(getByTestId('5-card-name')).toHaveTextContent(
+        'Beef Dumpling Stew'
+      );
+      expect(getByTestId('All-category-filter')).toHaveTextContent('All');
+      fireEvent.click(category);
+      await waitFor(() => expect(getRecipesApi).toHaveBeenCalledTimes(4));
+      expect(getByTestId('11-card-name')).toHaveTextContent('Pancakes');
+    }
+  );
 });
