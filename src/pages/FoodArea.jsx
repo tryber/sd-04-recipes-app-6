@@ -77,6 +77,6 @@ FoodArea.propTypes = {
   loadingArea: PropTypes.bool.isRequired,
   areaAPI: PropTypes.func.isRequired,
   recipesFoods: PropTypes.func.isRequired,
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoodArea);
