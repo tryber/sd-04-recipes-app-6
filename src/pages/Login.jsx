@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import loginValidation from '../services/loginValidation';
-import '../App.css';
+import '../styles/Login.css';
 import useLogin from '../hooks/useLogin';
 
 const Login = () => {
@@ -13,7 +13,7 @@ const Login = () => {
 
   if (isRedirect) return <Redirect to="/comidas" />;
   return (
-    <div className="Login">
+    <div className="login">
       <h1>Login</h1>
       <Input
         test="email-input"
@@ -27,6 +27,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
+        className="button-category"
         test="login-submit-btn"
         disabled={loginValidation(user.email, password)}
         onClick={() => {
