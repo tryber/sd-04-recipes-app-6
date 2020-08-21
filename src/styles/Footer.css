@@ -6,6 +6,7 @@
   justify-content: space-between;
   position: fixed;
   width: 100%;
+  background-color:rgba(148,193,98);
 }
 
 .Footer a:first-child {

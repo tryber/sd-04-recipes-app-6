@@ -5,6 +5,7 @@ header {
   justify-content: center;
   margin-bottom: 15px;
   min-height: 10vh;
+  background-color:rgba(148,193,98);
 }
 
 h2 {

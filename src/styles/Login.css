@@ -1,12 +1,23 @@
+body {
+  background-color: rgba(255,240,119);
+}
+
 .login {
   align-items: center;
-  background-color: lightgrey;
-  border-radius: 0.5rem;
-  box-shadow: 1rem 2rem 5rem #aaa;
   display: flex;
-  height: 10rem;
-  justify-content: center;
-  margin-bottom: 5rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 50%;
+}
+
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+input {
+  background-color: #d3d3d3;
+  border-radius: 0.5rem;
+  margin: 5px;
+  padding: 5px;
   position: relative;
-  width: 60rem;
 }

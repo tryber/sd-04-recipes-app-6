@@ -47,12 +47,11 @@ function App() {
         <Route path="/comidas" component={Foods} />
         <Route path="/bebidas" component={Drinks} />
         <Route path="/receitas-favoritas" component={FavoriteRecipes} />
-        <Route component={NotFound} />
-
         <UserProvider>
           <Route path="/perfil" component={Profile} />
           <Route exact path="/" component={Login} />
         </UserProvider>
+        {/* <Route component={NotFound} /> */}
       </Switch>
     </React.Fragment>
   );
